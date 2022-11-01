@@ -3,8 +3,7 @@ entries:
   smarter-cloud:
   - annotations:
       artifacthub.io/changes: |
-        - Fix template
-        - Add annotations
+        - Initial release
       artifacthub.io/license: Apache-2.0
       artifacthub.io/maintainers: |
         - name: Eric Van Hensbergen
@@ -15,7 +14,7 @@ entries:
         url: https://keybase.io/ericvh/pgp_keys.asc
     apiVersion: v2
     appVersion: 2.0.0
-    created: "2022-10-31T21:22:13.092526-05:00"
+    created: "2022-10-31T22:19:38.829439-05:00"
     dependencies:
     - alias: cert-manager
       condition: cert-manager.enabled
@@ -35,13 +34,13 @@ entries:
       repository: https://fluent.github.io/helm-charts
       version: 0.20.9
     description: smarter cloud deploymnent chart
-    digest: af655026042b423069f7b64b65d270fffe4cbba8ff5f6b59be14595ea7f0a632
+    digest: 706bfa916aca17088fcb4f2e44e5542ee9bab833c469136972897a60fb74e689
     home: https://gitlab.com/smarter-project/documentation
-    icon: https://www.lfedge.org/wp-content/uploads/2019/01/lfedge-logo.svg
+    icon: https://gitlab.com/uploads/-/system/group/avatar/59012546/ARM1636_Project_Logo_ST2_RGB_V1.png
     kubeVersion: '>=1.18.0-0'
     name: smarter-cloud
     sources:
-    - https://github.com/ericvh/lfedge-catalog-proposal
+    - https://gitlab.com/smarter-project/documentation
     type: application
     urls:
     - https://smarter-project.gitlab.io/documentation/charts/smarter-cloud-0.1.0.tgz
@@ -61,7 +60,7 @@ entries:
         url: https://keybase.io/alexandref75/pgp_keys.asc
     apiVersion: v2
     appVersion: v1.33
-    created: "2022-10-31T21:22:13.092742-05:00"
+    created: "2022-10-31T22:19:38.834277-05:00"
     description: smarter-cni chart for SMARTER edge devices
     digest: dfb982bca3235f442607740b754ae3d9f33658707fc2a40a8f6760327c55238d
     home: https://gitlab.com/smarter-project/smarter-cni
@@ -91,7 +90,7 @@ entries:
         url: https://keybase.io/alexandref75/pgp_keys.asc
     apiVersion: v2
     appVersion: v1.20.11
-    created: "2022-10-31T21:22:13.092937-05:00"
+    created: "2022-10-31T22:19:38.836439-05:00"
     description: smarter-device-manager chart for SMARTER edge devices
     digest: ef1c2b6f0e712e5ada853b420d0a27606745c0eb67746edac48441656964f451
     home: https://gitlab.com/smarter-project/smarter-device-manager/helm
@@ -121,7 +120,7 @@ entries:
         url: https://keybase.io/alexandref75/pgp_keys.asc
     apiVersion: v2
     appVersion: v1.3.7
-    created: "2022-10-31T21:22:13.093126-05:00"
+    created: "2022-10-31T22:19:38.838338-05:00"
     description: smarter-dns chart for SMARTER edge devices
     digest: b58900465d845cf7fdcdb5918265a1d0fa3b0fd990f84f2188a7c9ec080dc2fb
     home: https://gitlab.com/smarter-project/smarter-dns
@@ -136,4 +135,4 @@ entries:
     urls:
     - https://smarter-project.gitlab.io/documentation/charts/smarter-dns-0.0.1.tgz
     version: 0.0.1
-generated: "2022-10-31T21:22:13.070229-05:00"
+generated: "2022-10-31T22:19:38.806954-05:00"

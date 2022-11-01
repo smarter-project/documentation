@@ -3,8 +3,7 @@ Hash: SHA512
 
 annotations:
   artifacthub.io/changes: |
-    - Fix template
-    - Add annotations
+    - Initial release
   artifacthub.io/license: Apache-2.0
   artifacthub.io/maintainers: |
     - name: Eric Van Hensbergen
@@ -35,30 +34,30 @@ dependencies:
   version: 0.20.9
 description: smarter cloud deploymnent chart
 home: https://gitlab.com/smarter-project/documentation
-icon: https://www.lfedge.org/wp-content/uploads/2019/01/lfedge-logo.svg
+icon: https://gitlab.com/uploads/-/system/group/avatar/59012546/ARM1636_Project_Logo_ST2_RGB_V1.png
 kubeVersion: '>=1.18.0-0'
 name: smarter-cloud
 sources:
-- - https://github.com/ericvh/lfedge-catalog-proposal
+- - https://gitlab.com/smarter-project/documentation
 type: application
 version: 0.1.0
 
 ...
 files:
-  smarter-cloud-0.1.0.tgz: sha256:af655026042b423069f7b64b65d270fffe4cbba8ff5f6b59be14595ea7f0a632
+  smarter-cloud-0.1.0.tgz: sha256:706bfa916aca17088fcb4f2e44e5542ee9bab833c469136972897a60fb74e689
 -----BEGIN PGP SIGNATURE-----
 
-wsFcBAEBCgAQBQJjYIF7CRCI/9X7Sl//mAAAiZkQAMH8PsIeBsHQRpcMXADFQSMD
-FuEKL8VTzHang1IhWMsAIzxpbNW6PFjQuOrCwsdaPXu8A9X33w3DYe+Q2OiQR1Ia
-0Va5k883pBct5riadXGiXoUv83D1k44Q7lfUfciVKlKer7dj1EmAvDpCMwkIOU/D
-QLBdg83Pvugd3IWEjerscKZN+WOx0Ugij3E+fy9M4pz9W6drGyJ43UBmV1JwTlLu
-7Ewz9Nq2Dz6/DT0TNdmChCt2E/II0x5dHWjr8dbsb8uuIb2vU9PcJd6tcmNzoEjH
-sZnZm/vmbUGZE4EdgrdZGQqonxaXu2XjWlY+31/LpbM1aLtZdmd0dTM0bc0qLX+G
-oxpzfy9lEp9OFHkTx3hjJlq5vvpDFmI5gmDWyzFajgJhfMgBUawdWOAZcpjOx8pj
-3Z/pV3NRDeRhLmROCjYPHy/NSryo8pDqu4oZzp1dfWW2l4vtq1pQLnZKDuTSVsEV
-x0OSji8BLBq6cOag4CPAXNVlYLBOV89GvUfyiSRrwXykXVxCpkEK7i2ASCjyjrnU
-vEmCumHIrd9y13Y1fczxaNfQcr3CYHTHVmKIeZ9HlPQnwBypMBb6PXGlRHpNoA+B
-/1hm8v+AGirnEXeLoVVvXz1EtpIeoFUJUrki/bJGx/6O8q0LIiSI9HH0VOkhOMrO
-WKTQ4XbOSD+LevfzUeB4
-=UYH5
+wsFcBAEBCgAQBQJjYJA+CRCI/9X7Sl//mAAAPVoQAHllhMBtp+agSPOAIK6Dc01P
+KDjdD1yRwVZ7SqEwusKOgl6oyYklzxqYSuC9H2fjXRJFDHGbC5POk5c31W0D9BtX
+o4ixTGewUoKPXzBwzmslahTpetq7c9H7fw64do/S72BLS0vqdFNG4799BNdkIMeT
+ZuVFNGmGoHxFpg/PxBTmR7Dmv7wG8iJv1AtDSwzp7YLmD75PMIJ6EgOLwUWcpAYe
+48PIkn2XJ/HBTq/DDjX4HFnijbOL5HZ+6b1Pn78wZ9RCGF5EcXBtapfXBdemdaLa
+i8jrJAXkB1VveHAdb669c/vodpQfahh6xbRYdd75T78KtZi3m6obDr8H+4JYpi65
+JhZc5zWrW95GxU7tXQQ5woWnuL85Qt2iTkBKHwIHo62WzhNSquQP0JPJZyWR5TgX
+6jeWkwVRxA7+HaY+w8C0R8hjCqCRA+WfifgR+1d/CB8dWwyKbQ2mMQlyb0mYCBRH
+f+nYKbL9wgOUapB9+08D2CAiH0LjrPqXqbi38n+aS1NUYsA+02JPk8EphHzHRxGK
+yUz6mQBPYxrU9MzkqDKF3fSjrHL2PLRD0OZX39yj0TQWJr8H/Rj9ttKKBWBPZ8AF
+BwbjwSPsU0TCvfevlpbzK4aOQloq9U8EWI/EfgRMF37jVdNaUw4l4bO2AfiRoTzy
+fj9GYVGqWfiMx8icpLa5
+=vNlb
 -----END PGP SIGNATURE-----
