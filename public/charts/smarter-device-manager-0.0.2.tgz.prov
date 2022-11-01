@@ -1,0 +1,48 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+annotations:
+  artifacthub.io/changes: |
+    - Fix template
+    - Add annotations
+  artifacthub.io/license: Apache-2.0
+  artifacthub.io/maintainers: |
+    - name: Alexandre Ferreira
+      email: alexandref75@gmail.com
+  artifacthub.io/prerelease: "false"
+  artifacthub.io/signKey: |
+    fingerprint: 82AD709FEC4ECA4C84B093889BDC9DE410CFC23B
+    url: https://keybase.io/alexandref75/pgp_keys.asc
+apiVersion: v2
+appVersion: v1.20.11
+description: smarter-device-manager chart for SMARTER edge devices
+home: https://gitlab.com/smarter-project/smarter-device-manager/helm
+keywords:
+- - kubernetes
+- - device
+- - hardware
+kubeVersion: '>=1.16.0-0'
+name: smarter-device-manager
+sources:
+- - https://gitlab.com/smarter-project/smarter-device-manager
+version: 0.0.2
+
+...
+files:
+  smarter-device-manager-0.0.2.tgz: sha256:ef1c2b6f0e712e5ada853b420d0a27606745c0eb67746edac48441656964f451
+-----BEGIN PGP SIGNATURE-----
+
+wsFcBAEBCgAQBQJjYIALCRCI/9X7Sl//mAAA5lMQAGGZ4jp41WfHAREbkQvjmgoI
+03uNSwC9TuC4Av454UT5zzpPm80jKOpvwKtQPhNmgjj9RJxdCROKeyfBskQhr6sy
+piULesHDmtRwt4RSRfJ7zcEEd0mJ0tKD48nSaU/lr0OvkTk9+TeFxf0+uDbzJsf+
+QjXKuITNZ3FvHhwcautITZwraOnhGwKLeNA16h2tqVJtsb95EHc4qU+naBUKAsmr
+Jq6ufMIxhze0fkTeUzkRIJG5hFdB/YBJ236mcLR2jPDQBOMLwwgLFbvreiN5+BG/
+ES38p8oW4kobvxZmesWMVDjf4p3rHbgK6aF+PMYXCDSASjZeMmix6sTeENhQxMNC
+cPGuj0GOdTyqPHb0Kj+JHiMviMxOJZtGiv2yQkUavh416OOODoRLk6Yq86H86ekM
+3FCvFgIt7ubW98N4nFdoym0Lm8TxUj69Sl/G+0sR/3XCOpbA4w6gWUE7+zYqbnvz
+ic4rctIQta4CSNn3X8PkTc3qADTtdppeSKvtU3s3qPK46mWScgNhfdA4KlPQpT7f
+mLVjryoAhwML5GMv7+GCUjAYCZ0DGetrvw/dXJieQqiwBtMC5adWhwCWAXrvWGkE
+bLFkV0Em8yYRR/IAZOxzxjroRf/YIPGxIsQhgDtvv6EUDsEodNYEPUIRKemtoXNI
+rgpOvfQMfUJgMf4QT4qx
+=LSTx
+-----END PGP SIGNATURE-----
