@@ -1,0 +1,48 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+annotations:
+  artifacthub.io/changes: |
+    - Fix template
+    - Add annotations
+  artifacthub.io/license: Apache-2.0
+  artifacthub.io/maintainers: |
+    - name: Alexandre Ferreira
+      email: alexandref75@gmail.com
+  artifacthub.io/prerelease: "false"
+  artifacthub.io/signKey: |
+    fingerprint: 82AD709FEC4ECA4C84B093889BDC9DE410CFC23B
+    url: https://keybase.io/alexandref75/pgp_keys.asc
+apiVersion: v2
+appVersion: v1.33
+description: smarter-cni chart for SMARTER edge devices
+home: https://gitlab.com/smarter-project/smarter-cni
+keywords:
+- - kubernetes
+- - device
+- - hardware
+kubeVersion: '>=1.16.0-0'
+name: smarter-cni
+sources:
+- - https://gitlab.com/smarter-project/smarter-cni
+version: 0.0.1
+
+...
+files:
+  smarter-cni-0.0.1.tgz: sha256:dfb982bca3235f442607740b754ae3d9f33658707fc2a40a8f6760327c55238d
+-----BEGIN PGP SIGNATURE-----
+
+wsFcBAEBCgAQBQJjYIAbCRCI/9X7Sl//mAAAfAYQAJ5auEvjLD0h1RLJShdar6oD
+PqD3JjXh92QCgVDjUpgeznKQZ7m5d0ioEfe+LQsC0IIENcx25Bh+fryGv7rWLmXH
+IwqZF4o9tR2sdo3LgiYJFwdnuRXJ0kHec+8e2ZOF17TjzU4BO4kommM2+Nc65pk4
+6q9549BjmPG7du98ImIOiHkOqFKRhEPbC4APZ3rt2TL2p5jNvRsara50mD9zJA+h
+W2lVTZnQBO2SKbjkIe5GAbdn2j0t/+gOFYknSY1eqDCzbUGgj/1Fsc8MYNR+Yvh7
+cn1Y0xiV+L7NBlSyNfng+3yZ6wWXxA8Cc016AqQDFTWy2iVKG+fqfSTyzYGMU9NI
+4X2uw7ESbNdR83kI9AB2AO0U+pJ7JTE3MOc1ZB/G/ifngQm/85VSjwr8fVvElkiG
+O9arBZsURqJXcRkpPgbiIUKPt6/CenGASva3ntwyChLx74B913U+dC5gOL51LMZc
+0Zdx/Lf0OZuJr4VbWQOFNEFpE8hbihFhFGfRt7YrKOvAsw7MYligOS3kkE42h1x1
+lixHNbxnKQBeaoklzARD0sTyBNG3JyH2z12nCP/LkJ9x72CQ6j/iSsoGaP/1asrZ
+Z3wn/nsYkRSTbY57DSavo8xONm3Ah+q3xbovwJmcCOL8vQsJP5HwtASML75fq0p2
+7YioLz5GbjT9QU71r2HQ
+=Sbto
+-----END PGP SIGNATURE-----
