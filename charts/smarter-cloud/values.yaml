@@ -1,0 +1,113 @@
+# Default values for smarter-cloud.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+namespace: smarter-cloud
+
+domain: example.com
+
+cert-manager:
+  ingressShim:
+    defaultIssuerGroup: cert-manager.io
+    defaultIssuerKind: ClusterIssuer
+    defaultIssuerName: cert-manager-acme-issuer
+
+fluent-bit:
+  service:
+    type: NodePort
+  extraPorts:
+    - name: in-forward
+      containerPort: 24224
+      port: 24224
+      protocol: TCP
+      nodePort: 30224
+
+  config:
+    inputs: |
+      [INPUT]
+          Name              forward
+          Listen            0.0.0.0
+          Port              24224
+          Buffer_Chunk_Size 1M
+          Buffer_Max_Size   6M
+
+    filters: |
+      # No Filters
+
+    outputs: |
+      [OUTPUT]
+          Name          influxdb
+          Match         cpu_local
+          Host          {{ .Release.Name }}-influxdb
+          Port          8086
+          Database      waggledemo
+          Sequence_Tag  _seq
+          Tag_Keys      method path
+          tls           On
+            
+influxdb:
+  image:
+    repository: "influxdb"
+    tag: "2.4.0-alpine"
+  persistence:
+    enabled: true
+    storageClass: "local-path"
+    size: 4Gi
+
+  initScripts:
+    enabled: true
+    scripts:
+      init.iql: |+
+        CREATE DATABASE "waggledemo"; CREATE DATABASE "prometheus"
+
+kube-prometheus-stack:
+  grafana:
+    admin:
+      existingSecret: "{{ .Release.Name }}-grafana-credentials"
+    persistence:
+      enabled: true
+      storageClassName: "local-path"
+      accessModes:
+        - ReadWriteOnce
+      size: 3Gi     
+    datasources:
+      datasources.yaml:
+        apiVersion: 1
+        datasources:
+        - name: InfluxDB-Waggle
+          type: influxdb
+          url: http://{{ .Release.Name }}-influxdb:8086
+          access: proxy
+          isDefault: false
+          database: "waggledemo"
+          basicAuth: false
+          readonly: false
+        - name: InfluxDB-internal
+          type: influxdb
+          url: http://{{ .Release.Name }}-influxdb:8086
+          access: proxy
+          isDefault: false
+          database: "_internal"
+          basicAuth: false
+          readonly: false  
+  prometheus:
+    prometheusSpec:
+      ## The remote_read spec configuration for Prometheus.
+      ## ref: https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md#remotereadspec
+      # remoteRead: 
+      #   - url: "http://influxdb:8086/api/v1/prom/read?db=prometheus"
+
+      ## The remote_write spec configuration for Prometheus.
+      ## ref: https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md#remotewritespec
+      # remoteWrite: 
+      #   - url: "http://influxdb:8086/api/v1/prom/write?db=prometheus"
+
+      storageSpec:
+        volumeClaimTemplate:
+          spec:
+            storageClassName: local-path
+            accessModes: ["ReadWriteOnce"]
+            resources:
+              requests:
+                storage: 3Gi
+          selector: {}
