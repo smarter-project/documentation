@@ -1,5 +1,7 @@
 # SMARTER v2
 
+[![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/smarter)](https://artifacthub.io/packages/search?repo=smarter)
+
 We are currently refactoring and updating SMARTER and placing into this repository.  Some of the goals for this new version:
 
 - Simplify deployment
