@@ -1,0 +1,48 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+annotations:
+  artifacthub.io/changes: |
+    - Fix template
+    - Add annotations
+  artifacthub.io/license: Apache-2.0
+  artifacthub.io/maintainers: |
+    - name: Alexandre Ferreira
+      email: alexandref75@gmail.com
+  artifacthub.io/prerelease: "false"
+  artifacthub.io/signKey: |
+    fingerprint: 82AD709FEC4ECA4C84B093889BDC9DE410CFC23B
+    url: https://keybase.io/alexandref75/pgp_keys.asc
+apiVersion: v2
+appVersion: v1.3.7
+description: smarter-dns chart for SMARTER edge devices
+home: https://gitlab.com/smarter-project/smarter-dns
+keywords:
+- - kubernetes
+- - device
+- - hardware
+kubeVersion: '>=1.16.0-0'
+name: smarter-dns
+sources:
+- - https://gitlab.com/smarter-project/smarter-dns
+version: 0.0.1
+
+...
+files:
+  smarter-dns-0.0.1.tgz: sha256:2afc8ac6794c1b54c7d45a7ad6e4b2db6cc68dc49d92490e3bf20214bb326546
+-----BEGIN PGP SIGNATURE-----
+
+wsFcBAEBCgAQBQJjYbVoCRCI/9X7Sl//mAAApGoQADaYOwAH1jjF/DCuY/eoi4kB
+h+/9rROyF8DthlMcAHWnrbq0nhuMV9VvKX/AGqOdj+4TOgEb1n7bINubSB7+JEzM
+EA9kdhUmseEyexkx5v6DoEcMAH6fAsh2kI46o3g/QL1DOi76cGGQYBzPFWMIiQEq
+GSoULi0praEpzJdoQt/K1BDzkwKJ5BSOTcyfgQF5J5v3ehOQVecGIiC2Oh1ZqRqS
+zy3fDBgTT2hMNX7bum7gNqY5xzkpfFD+3gw2pwTpC3Sx/PnUlo5yumEHluz8/O8b
+s+7CCpevujSQrDCJOYd56x2hE7oJKNkiX4aDw9g7zmnlY5JMaAOXQHzFdHzpjPVO
+gEmbnzPjv7EbBVnIHPrGRWuAFW5NwYF6VLLwx9WmSVuzVw4PRbvkzIlaKpaGwO/1
+6pqXCbBKZmJK7cH2CwrjA65BjIbxPtldFdTWhrZ+t136CaXcZcPGHh8O1oMAg5kj
+HPN6cgsBloSKiVLBYKiSdCVcx9sURlkJBBnVr7bO0oFBdLqis3J5JKV7rTaLdRAJ
+mRz2mr4rvBxlL5dLZ39Ngl9Ww2ODa3q7kVaLehyIyLPEbb8MQum0KzmMzIKiE1n3
+nMzW7CfUyfZewreiMdLRirkxOaQMAWjYVfZGHjN2hOwgq6ZMTYfCGmub+roqkVMZ
+MUT2yjUOXQf8IapE5/t9
+=3EkZ
+-----END PGP SIGNATURE-----

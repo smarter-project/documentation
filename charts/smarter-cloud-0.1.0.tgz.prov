@@ -1,0 +1,63 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+annotations:
+  artifacthub.io/changes: |
+    - Initial release
+  artifacthub.io/license: Apache-2.0
+  artifacthub.io/maintainers: |
+    - name: Eric Van Hensbergen
+      email: ericvh@gmail.com
+  artifacthub.io/prerelease: "false"
+  artifacthub.io/signKey: |-
+    fingerprint: 9696F0D196A59098A4CAD15188FFD5FB4A5FFF98
+    url: https://keybase.io/ericvh/pgp_keys.asc
+apiVersion: v2
+appVersion: 2.0.0
+dependencies:
+- - alias: cert-manager
+  condition: cert-manager.enabled
+  name: cert-manager
+  repository: https://charts.jetstack.io
+  version: v1.10.0
+- - alias: influxdb
+  name: influxdb
+  repository: https://helm.influxdata.com/
+  version: v4.12.0
+- - alias: prometheus
+  name: kube-prometheus-stack
+  repository: https://prometheus-community.github.io/helm-charts
+  version: 41.7.0
+- - alias: fluent-bit
+  name: fluent-bit
+  repository: https://fluent.github.io/helm-charts
+  version: 0.20.9
+description: smarter cloud deploymnent chart
+home: https://gitlab.com/smarter-project/documentation
+icon: https://gitlab.com/uploads/-/system/group/avatar/59012546/ARM1636_Project_Logo_ST2_RGB_V1.png
+kubeVersion: '>=1.18.0-0'
+name: smarter-cloud
+sources:
+- - https://gitlab.com/smarter-project/documentation
+type: application
+version: 0.1.0
+
+...
+files:
+  smarter-cloud-0.1.0.tgz: sha256:47c60ba187343ae21e65d403585b39dba0105f06ee0266110686420ffe831e6c
+-----BEGIN PGP SIGNATURE-----
+
+wsFcBAEBCgAQBQJjYbYlCRCI/9X7Sl//mAAAU/oQAJNXun+76f+L5/k4wdGosZKO
+ip3y2vJWi2P73SL/MvowayPhzeNYKJJE67F6aouRMDBlzxywygPXLdEBZdRGzfB7
+RnYvR7i1312slcPGwyBcKR1enwsVBaNbIJXg+kK9f5OI1AwEGP07XC17GCRJBR2/
+b/rGEBumeL6wcu78VO4E0CQPtkfT7GTRPE1W+rwyFlobBso2jRUeODHwNY+66eyB
+UKTxkZJB+orqFmIXWkSHZ6iIOKLWeLy/P+qZ9bTrJPzPLTJrAVhHnGhN4okj1Ajf
+TE+p4wbrcNisCV0wymO1L/GN1yQdv7Bi+GbktTyJA70G5MueTVyxaZwTbMFbqj3D
+Pm2EFnUSuC1Za+9TWqrI8jJ+q5evWVdgajCW/y5DRLStGiC1VzR4vxE3x6zXV4e/
+9eRQZBdGb1L9qEz/tQeSgaXAIJ0J11qdg8TWAbe5en2c24OynIT49dIgmTn6+Lt/
+acw/kRRCz/QhKt8kH7FpN5ZVA5Qqjvfo5aUN8KaiOimezCfaG+h4sK/1Q5P4uBxx
+994GGnOvcoH+jbmdYdR/pIU8ma+QoIjcZxYOm6KApI/HQPkWz4LeqANJ6FV7y8XD
+ilHu19uPHGcc9eD3tl9TAD78U5oM7Mv1ysghiChO/5NSNpfOxn+TWhoctryHTSwZ
+77jDqU5njo0lEZTV4Xms
+=oUB7
+-----END PGP SIGNATURE-----
