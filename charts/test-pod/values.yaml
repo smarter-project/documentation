@@ -1,0 +1,9 @@
+application:
+  namespace: smarter
+  appName: smarter-test-pod
+
+image:
+  repository: alpine
+  # @default -- chart.appVersion
+  tag: ""
+  pullPolicy: IfNotPresent
