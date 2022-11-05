@@ -14,7 +14,7 @@ DOCKERIMAGE=${DOCKERIMAGE:-rancher/k3s:v1.25.2-k3s1}
 CLOUD_INSTANCE=No
 
 function check_running_cloud() {
-    type cloud-init 2>/dev/null || CLOUD_INSTANCE=No;return
+    type cloud-init 2>/dev/null || return
 
     echo "Cloud instance, grabbing the extrnal IP"
     CLOUD_INSTANCE=Yes
