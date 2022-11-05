@@ -29,13 +29,13 @@ kubeVersion: ">=1.18.0-0"
 
 dependencies:
   - name: smarter-cni
-    version: v1.34
+    version: 0.0.1
     repository: https://smarter-project.gitlab.io/documentation/charts
   - name: smarter-dns
-    version: v1.3.8
+    version: 0.0.1
     repository: https://smarter-project.gitlab.io/documentation/charts
   - name: smarter-device-manager
-    version: v1.20.11
+    version: 0.0.2
     repository: https://smarter-project.gitlab.io/documentation/charts
 
 icon: https://gitlab.com/uploads/-/system/group/avatar/59012546/ARM1636_Project_Logo_ST2_RGB_V1.png
