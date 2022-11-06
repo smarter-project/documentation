@@ -31,6 +31,21 @@ dependencies:
     version: 0.20.9
     repository: https://fluent.github.io/helm-charts
     alias: fluent-bit
+  - name: smarter-gstreamer
+    version: 0.0.1
+    repository: https://smarter-project.github.io/documentation/charts
+  - name: smarter-pulseaudio
+    version: 0.0.1
+    repository: https://fluent.github.io/helm-charts/documentation/charts
+  - name: smarter-image-detector
+    version: 0.0.1
+    repository: https://fluent.github.io/helm-charts/documentation/charts
+  - name: smarter-audio-client
+    version: 0.0.1
+    repository: https://fluent.github.io/helm-charts/documentation/charts
+  - name: smarter-admission-controller
+    version: 0.0.1
+    repository: https://fluent.github.io/helm-charts/documentation/charts
 
 sources:
   - https://gitlab.com/smarter-project/documentation
