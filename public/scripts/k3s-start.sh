@@ -193,9 +193,6 @@ curl -sfL https://get.k3s.io | \\
 sh -s - \\
   --kubelet-arg cluster-dns=169.254.0.2 \\
   --log /var/log/k3s.log \\
-  --node-label smarter-device-manager=enabled \\
-  --node-label smarter.cni=deploy \\
-  --node-label smarter.cri=containerd \\
   --node-label smarter.nodetype=unknown \\
   --node-label smarter.nodemodel=unknown \\
   --node-label smarter.type=edge \\
