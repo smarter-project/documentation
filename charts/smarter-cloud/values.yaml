@@ -54,10 +54,10 @@ fluent-bit:
 influxdb:
   image:
     tag: "1.8"
-#  persistence:
-#    enabled: true
-#    storageClass: "local-path"
-#    size: 4Gi
+  persistence:
+    enabled: true
+    storageClass: "local-path"
+    size: 4Gi
 
   initScripts:
     enabled: true
