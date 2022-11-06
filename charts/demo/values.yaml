@@ -1,0 +1,171 @@
+# Default values for smarter-edge.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+global:
+    domain: d.getsmarter.io
+  
+fluent-bit:
+  fluentd:
+    host: fluentbit
+    port: 30224
+  nodeSelector:
+    smarter-fluent-bit: enabled
+  tolerations:
+    - key: "smarter.type"
+      operator: "Equal"
+      value: "edge"
+      effect: "NoSchedule"
+  hostname: smarter-fluent-bit
+  config:
+    inputs: |
+      [INPUT]
+          name          cpu
+          Tag           cpu
+          Interval_Sec  30
+      [INPUT]
+          Name        tcp
+          Tag         netdata
+          Listen      0.0.0.0
+          Port        5170
+          Chunk_Size  64
+          Buffer_Size 128
+          Format      json
+      [INPUT]
+          Name   mqtt
+          alias  mqttdata
+          Tag    mqttdata
+          Listen 0.0.0.0
+          Port   1883
+
+    filters: |
+      [FILTER]          
+          Name          record_modifier
+          Match         ${HOSTNAME}
+          Record        hostname ${HOSTNAME}
+
+      [FILTER]
+          Name          record_modifier
+          Match         car_count
+          Record        hostname ${HOSTNAME}
+
+      [FILTER]
+          Name          record_modifier
+          Match         person_count
+          Record        hostname ${HOSTNAME}
+
+      [FILTER]
+          Name          record_modifier
+          Match         bus_count
+          Record        hostname ${HOSTNAME}
+
+      [FILTER]
+          Name          record_modifier
+          Match         bicycle_count
+          Record        hostname ${HOSTNAME}
+
+      [FILTER]
+          Name          record_modifier
+          Match         motorcycle_count
+          Record        hostname ${HOSTNAME}
+
+      [FILTER]
+          Name          record_modifier
+          Match         sound_class
+          Record        hostname ${HOSTNAME}
+
+      [FILTER]
+          Name          record_modifier
+          Match         pms7003_count
+          Record        hostname ${HOSTNAME}
+
+      [FILTER]
+          Name          record_modifier
+          Match         weatherbit_count
+          Record        hostname ${HOSTNAME}
+
+      [STREAM_TASK]
+          Name  car_count
+          Exec  CREATE STREAM car_count AS SELECT * FROM STREAM:mqttdata WHERE topic = '/demo/car_count';
+
+      [STREAM_TASK]
+          Name  person_count
+          Exec  CREATE STREAM person_count AS SELECT * FROM STREAM:mqttdata WHERE topic = '/demo/person_count';
+
+      [STREAM_TASK]
+          Name  bus_count
+          Exec  CREATE STREAM bus_count AS SELECT * FROM STREAM:mqttdata WHERE topic = '/demo/bus_count';
+
+      [STREAM_TASK]
+          Name  bicycle_count
+          Exec  CREATE STREAM bicycle_count AS SELECT * FROM STREAM:mqttdata WHERE topic = '/demo/bicycle_count';
+
+      [STREAM_TASK]
+          Name  motorcycle_count
+          Exec  CREATE STREAM motorcycle_count AS SELECT * FROM STREAM:mqttdata WHERE topic = '/demo/motorcycle_count';
+
+      [STREAM_TASK]
+          Name  sound_class
+          Exec  CREATE STREAM sound_class AS SELECT * FROM STREAM:mqttdata WHERE topic = '/demo/sound_class';
+
+      [STREAM_TASK]
+          Name  pms7003_count
+          Exec  CREATE STREAM pms7003_count AS SELECT * FROM STREAM:mqttdata WHERE topic = '/demo/pms7003';
+  
+      [STREAM_TASK]
+          Name  weatherbit_count
+          Exec  CREATE STREAM weatherbit_count AS SELECT * FROM STREAM:mqttdata WHERE topic = '/demo/weatherbit';
+
+    outputs: |
+      [OUTPUT]
+          Name            stdout
+          Match           *
+      [OUTPUT]
+          Name            forward
+          Match           cpu
+          Host            {{ .Values.fluentd.host }}.{{ .Values.global.domain }}
+          Port            {{ .Values.fluentd.port }}
+          Self_Hostname   ${HOSTNAME}
+      [OUTPUT]
+          Name            forward
+          Match           *_count
+          Host            {{ .Values.fluentd.host }}.{{ .Values.global.domain }}
+          Port            {{ .Values.fluentd.port }}
+          Self_Hostname   ${HOSTNAME}
+      [OUTPUT]
+          Name            forward
+          Match           *_class
+          Host            {{ .Values.fluentd.host }}.{{ .Values.global.domain }}
+          Port            {{ .Values.fluentd.port }}
+          Self_Hostname   ${HOSTNAME}
+      [OUTPUT]
+          Name            forward
+          Match           netdata
+          Host            {{ .Values.fluentd.host }}.{{ .Values.global.domain }}
+          Port            {{ .Values.fluentd.port }}
+          Self_Hostname   ${HOSTNAME}
+
+    customParsers: |
+      [PARSER]
+          Name   json
+          Format json
+          Time_Key time
+          Time_Format %d/%b/%Y:%H:%M:%S %z
+
+      [PARSER]
+          Name        docker
+          Format      json
+          Time_Key    time
+          Time_Format %Y-%m-%dT%H:%M:%S.%L
+          Time_Keep   On
+          # Command      |  Decoder | Field | Optional Action
+          # =============|==================|=================
+          Decode_Field_As   escaped    log
+
+      [PARSER]
+          Name        syslog
+          Format      regex
+          Regex       ^\<(?<pri>[0-9]+)\>(?<time>[^ ]* {1,2}[^ ]* [^ ]*) (?<host>[^ ]*) (?<ident>[a-zA-Z0-9_\/\.\-]*)(?:\[(?<pid>[0-9]+)\])?(?:[^\:]*\:)? *(?<message>.*)$
+          Time_Key    time
+          Time_Format %b %d %H:%M:%S
+
