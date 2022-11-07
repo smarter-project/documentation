@@ -3,8 +3,8 @@
 # Declare variables to be passed into your templates.
 
 global:
-    domain: d.getsmarter.io
-  
+  domain: d.getsmarter.io
+
 fluent-bit:
   fluentd:
     host: fluentbit
@@ -18,6 +18,19 @@ fluent-bit:
       effect: "NoSchedule"
   hostname: smarter-fluent-bit
   config:
+    service: |
+      [SERVICE]
+          Daemon Off
+          Flush {{ .Values.flush }}
+          Log_Level {{ .Values.logLevel }}
+          Parsers_File parsers.conf
+          Parsers_File custom_parsers.conf
+          HTTP_Server On
+          HTTP_Listen 0.0.0.0
+          HTTP_Port {{ .Values.metricsPort }}
+          Health_Check On
+          Streams_File mqtt-split.conf
+
     inputs: |
       [INPUT]
           name          cpu
@@ -84,37 +97,39 @@ fluent-bit:
           Match         weatherbit_count
           Record        hostname ${HOSTNAME}
 
-      [STREAM_TASK]
-          Name  car_count
-          Exec  CREATE STREAM car_count AS SELECT * FROM STREAM:mqttdata WHERE topic = '/demo/car_count';
+    extraFiles:
+      mqtt-split.conf: |
+        [STREAM_TASK]
+            Name  car_count
+            Exec  CREATE STREAM car_count AS SELECT * FROM STREAM:mqttdata WHERE topic = '/demo/car_count';
 
-      [STREAM_TASK]
-          Name  person_count
-          Exec  CREATE STREAM person_count AS SELECT * FROM STREAM:mqttdata WHERE topic = '/demo/person_count';
+        [STREAM_TASK]
+            Name  person_count
+            Exec  CREATE STREAM person_count AS SELECT * FROM STREAM:mqttdata WHERE topic = '/demo/person_count';
 
-      [STREAM_TASK]
-          Name  bus_count
-          Exec  CREATE STREAM bus_count AS SELECT * FROM STREAM:mqttdata WHERE topic = '/demo/bus_count';
+        [STREAM_TASK]
+            Name  bus_count
+            Exec  CREATE STREAM bus_count AS SELECT * FROM STREAM:mqttdata WHERE topic = '/demo/bus_count';
 
-      [STREAM_TASK]
-          Name  bicycle_count
-          Exec  CREATE STREAM bicycle_count AS SELECT * FROM STREAM:mqttdata WHERE topic = '/demo/bicycle_count';
+        [STREAM_TASK]
+            Name  bicycle_count
+            Exec  CREATE STREAM bicycle_count AS SELECT * FROM STREAM:mqttdata WHERE topic = '/demo/bicycle_count';
 
-      [STREAM_TASK]
-          Name  motorcycle_count
-          Exec  CREATE STREAM motorcycle_count AS SELECT * FROM STREAM:mqttdata WHERE topic = '/demo/motorcycle_count';
+        [STREAM_TASK]
+            Name  motorcycle_count
+            Exec  CREATE STREAM motorcycle_count AS SELECT * FROM STREAM:mqttdata WHERE topic = '/demo/motorcycle_count';
 
-      [STREAM_TASK]
-          Name  sound_class
-          Exec  CREATE STREAM sound_class AS SELECT * FROM STREAM:mqttdata WHERE topic = '/demo/sound_class';
+        [STREAM_TASK]
+            Name  sound_class
+            Exec  CREATE STREAM sound_class AS SELECT * FROM STREAM:mqttdata WHERE topic = '/demo/sound_class';
 
-      [STREAM_TASK]
-          Name  pms7003_count
-          Exec  CREATE STREAM pms7003_count AS SELECT * FROM STREAM:mqttdata WHERE topic = '/demo/pms7003';
-  
-      [STREAM_TASK]
-          Name  weatherbit_count
-          Exec  CREATE STREAM weatherbit_count AS SELECT * FROM STREAM:mqttdata WHERE topic = '/demo/weatherbit';
+        [STREAM_TASK]
+            Name  pms7003_count
+            Exec  CREATE STREAM pms7003_count AS SELECT * FROM STREAM:mqttdata WHERE topic = '/demo/pms7003';
+
+        [STREAM_TASK]
+            Name  weatherbit_count
+            Exec  CREATE STREAM weatherbit_count AS SELECT * FROM STREAM:mqttdata WHERE topic = '/demo/weatherbit';
 
     outputs: |
       [OUTPUT]
@@ -168,4 +183,3 @@ fluent-bit:
           Regex       ^\<(?<pri>[0-9]+)\>(?<time>[^ ]* {1,2}[^ ]* [^ ]*) (?<host>[^ ]*) (?<ident>[a-zA-Z0-9_\/\.\-]*)(?:\[(?<pid>[0-9]+)\])?(?:[^\:]*\:)? *(?<message>.*)$
           Time_Key    time
           Time_Format %b %d %H:%M:%S
-
