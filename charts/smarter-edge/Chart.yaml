@@ -35,7 +35,7 @@ dependencies:
     version: 0.0.2
     repository: https://smarter-project.gitlab.io/documentation/charts
   - name: smarter-device-manager
-    version: 0.0.2
+    version: 0.0.3
     repository: https://smarter-project.gitlab.io/documentation/charts
 
 icon: https://gitlab.com/uploads/-/system/group/avatar/59012546/ARM1636_Project_Logo_ST2_RGB_V1.png

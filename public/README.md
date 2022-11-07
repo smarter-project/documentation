@@ -34,18 +34,11 @@ In the case you wish to deploy the demo we assume you have done the following:
 
 ## Smarter k3s server configuration
 
-- Use the helm chart on https://gitlab.com/smarter-project/documentation/charts to create the required common objects
+- Use the helm chart on https://gitlab.com/smarter-project/documentation/chart to install CNI, DNS and device-manager
    ```bash
-   helm install smarter-common charts/common
+   helm install --namespace smarter --create-namespace smarter-edge chart
    ```
-- Use the helm chart on https://gitlab.com/smarter-project/smarter-cni/chart to install the CNI
-   ```bash
-   helm install smarter-cni chart
-   ```
-- Use the helm chart on https://gitlab.com/smarter-project/smarter-dns/chart to install the dns server for the edge
-   ```bash
-   helm install smarter-dns chart
-   ```
+- Use the helm chart on each of hte modules. Remember to use the namespace and the correct labels. The individual charts do not install on devices automatically, they require labels.
 
 ## To setup your registered edge node from your development machine
 Plugin USB camera. You should be able to see the camera at `/dev/video0`.
