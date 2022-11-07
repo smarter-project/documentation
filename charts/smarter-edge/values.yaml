@@ -5,17 +5,14 @@
 namespace: smarter
 
 smarter-dns:
-  configuration:
-    nodeSelector:
-      smarter.type: edge
+  nodeSelector: 
+    smarter.type: edge
 
 smarter-cni:
-  configuration:
-    nodeSelector:
-      smarter.type: edge
+  nodeSelector:
+    smarter.type: edge
 
 smarter-device-manager:
-  configuration:
-    nodeSelector:
-      smarter.type: edge
+  nodeSelector:
+    smarter.type: edge
 
