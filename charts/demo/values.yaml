@@ -3,7 +3,7 @@
 # Declare variables to be passed into your templates.
 
 global:
-  domain: d.getsmarter.io
+  domain: example.com
 
 fluent-bit:
   fluentd:
