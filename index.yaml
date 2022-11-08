@@ -1,0 +1,48 @@
+apiVersion: v1
+entries:
+  smarter-cloud:
+  - annotations:
+      artifacthub.io/changes: |
+        - Initial release
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/maintainers: |
+        - name: Eric Van Hensbergen
+          email: ericvh@gmail.com
+      artifacthub.io/prerelease: "false"
+      artifacthub.io/signKey: |
+        fingerprint: 71EDA4E3D652DC73EB09E3A5387D298C169CF24E
+        url: https://smarter-project.github.io/documentation/pgp_keys.asc
+    apiVersion: v2
+    appVersion: 2.0.0
+    created: "2022-11-08T04:06:55.753414146Z"
+    dependencies:
+    - alias: cert-manager
+      condition: cert-manager.enabled
+      name: cert-manager
+      repository: https://charts.jetstack.io
+      version: v1.10.0
+    - alias: influxdb
+      name: influxdb
+      repository: https://helm.influxdata.com/
+      version: v4.12.0
+    - alias: prometheus
+      name: kube-prometheus-stack
+      repository: https://prometheus-community.github.io/helm-charts
+      version: 41.7.0
+    - alias: fluent-bit
+      name: fluent-bit
+      repository: https://fluent.github.io/helm-charts
+      version: 0.20.9
+    description: smarter cloud deployment chart
+    digest: 16b74d8d442380b4d902ef4dd8106502f2feca17bdcd3c313cb3df426cb8b554
+    home: https://gitlab.com/smarter-project/documentation
+    icon: https://gitlab.com/uploads/-/system/group/avatar/59012546/ARM1636_Project_Logo_ST2_RGB_V1.png
+    kubeVersion: '>=1.18.0-0'
+    name: smarter-cloud
+    sources:
+    - https://gitlab.com/smarter-project/documentation
+    type: application
+    urls:
+    - https://github.com/smarter-project/documentation/releases/download/smarter-cloud-0.1.2/smarter-cloud-0.1.2.tgz
+    version: 0.1.2
+generated: "2022-11-08T04:06:55.753423746Z"
