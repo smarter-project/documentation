@@ -29,8 +29,8 @@ kubeVersion: ">=1.18.0-0"
 dependencies:
   - name: fluent-bit
     version: 0.20.9
-    repository: https://fluent.github.io/helm-charts
-    alias: fluent-bit
+    repository: file://../smarter-fluent-bit
+    alias: smarter-fluent-bit
   - name: smarter-gstreamer
     version: 0.0.2
     repository: https://smarter-project.github.io/gstreamer

@@ -1,0 +1,31 @@
+annotations:
+  artifacthub.io/changes: |
+    - kind: changed
+      description: "Extended with hostname in daemonset"
+apiVersion: v2
+name: smarter-fluent-bit
+appVersion: 1.9.9
+description: Fast and lightweight log processor and forwarder or Linux, OSX and BSD
+  family operating systems.
+home: https://fluentbit.io/
+icon: https://fluentbit.io/assets/img/logo1-default.png
+keywords:
+- logging
+- fluent-bit
+- fluentd
+maintainers:
+- email: eduardo@calyptia.com
+  name: edsiper
+- email: naseem@transit.app
+  name: naseemkullah
+- email: towmeykaw@gmail.com
+  name: Towmeykaw
+- email: steve.hipwell@gmail.com
+  name: stevehipwell
+name: fluent-bit
+sources:
+- https://github.com/fluent/fluent-bit/
+version: 0.20.9
+artifacthub.io/signKey: |
+  fingerprint: 71EDA4E3D652DC73EB09E3A5387D298C169CF24E
+  url: https://smarter-project.github.io/documentation/pgp_keys.asc
