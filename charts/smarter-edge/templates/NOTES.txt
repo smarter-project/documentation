@@ -1,0 +1,7 @@
+Your SMARTER edge infrastructure has been provisioned.  If you edge-nodes are labeled correctly with the node 
+selectors as defined in values.yaml (default smarter.type: edge) then the smarter edge infrastructure daemonsets
+will be automatically deployed to your edge nodes.
+
+If you haven't already done so, provision your cloud side infrastructure to be able to receive data from your edgem nodes.
+For more details and instructions go to https://getsmarter.io
+

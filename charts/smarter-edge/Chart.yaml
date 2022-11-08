@@ -1,8 +1,8 @@
 apiVersion: v2
 name: smarter-edge
-description: smarter edge deploymnent chart
+description: smarter edge deployment chart
 
-home: https://gitlab.com/smarter-project/documentation
+home: https://getsmarter.io
 
 # A chart can be either an 'application' or a 'library' chart.
 #
@@ -17,7 +17,7 @@ type: application
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
-version: 0.0.2
+version: 0.0.3
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
@@ -30,17 +30,17 @@ kubeVersion: ">=1.18.0-0"
 dependencies:
   - name: smarter-cni
     version: 0.0.2
-    repository: https://smarter-project.gitlab.io/documentation/charts
+    repository: https://smarter-project.github.io/smarter-cni
   - name: smarter-dns
     version: 0.0.2
-    repository: https://smarter-project.gitlab.io/documentation/charts
+    repository: https://smarter-project.github.io/smarter-dns
   - name: smarter-device-manager
-    version: 0.0.3
-    repository: https://smarter-project.gitlab.io/documentation/charts
+    version: 0.0.7
+    repository: https://smarter-project.github.io/smarter-device-manager
 
 icon: https://gitlab.com/uploads/-/system/group/avatar/59012546/ARM1636_Project_Logo_ST2_RGB_V1.png
 sources:
-  - https://gitlab.com/smarter-project/documentation
+  - https://github.com/smarter-project/documentation
 
 annotations:
   artifacthub.io/changes: |
@@ -51,5 +51,5 @@ annotations:
       email: ericvh@gmail.com
   artifacthub.io/prerelease: "false"
   artifacthub.io/signKey: |
-    fingerprint: 9696F0D196A59098A4CAD15188FFD5FB4A5FFF98
-    url: https://keybase.io/ericvh/pgp_keys.asc
+    fingerprint: 71EDA4E3D652DC73EB09E3A5387D298C169CF24E
+    url: https://smarter-project.github.io/documentation/pgp_keys.asc

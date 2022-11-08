@@ -13,8 +13,7 @@ For more information on smarter go to https://getsmarter.io
 ## TL;DR
 
 ```console
-helm repo add smarter https://smarter-project.gitlab.io/documentation/charts
-helm install --set domain=example.com --set email=youremail@mail.com my-smarter-cloud smarter-cloud
+helm install --set domain=example.com --set email=youremail@mail.com smarter-cloud charts/smarter-cloud
 ```
 
 # Overview

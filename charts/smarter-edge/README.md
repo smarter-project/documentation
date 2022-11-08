@@ -9,8 +9,7 @@ For more information on smarter go to https://getsmarter.io
 ## TL;DR
 
 ```console
-helm repo add smarter https://smarter-project.gitlab.io/documentation/charts
-helm install my-smarter-edge smarter-edge
+helm install smarter-edge charts/smarter-edge
 ```
 
 # Overview
@@ -26,7 +25,7 @@ This chart assumes a full deployment of k3s with traefik, etc.
 # Uninstalling the Chart
 
 ```
-$ helm delete my-smarter-edge
+$ helm delete smarter-edge
 ```
 
 # Parameters

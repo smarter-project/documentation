@@ -1,14 +1,14 @@
 apiVersion: v2
 name: smarter-test-pod
 description: smarter-test-pod chart for SMARTER edge devices
-home: https://gitlab.com/smarter-project/documentation/charts/test-pod
-version: 0.0.1
+home: https://getsmater.io
+version: 0.0.2
 appVersion: latest
 kubeVersion: ">=1.16.0-0"
 keywords:
   - kubernetes
 sources:
-  - https://gitlab.com/smarter-project/documentation/charts/test-pod
+  - https://github.com/smarter-project/documentation/charts/test-pod
 
 annotations:
   artifacthub.io/changes: |
@@ -20,5 +20,5 @@ annotations:
       email: alexandref75@gmail.com
   artifacthub.io/prerelease: "false"
   artifacthub.io/signKey: |
-    fingerprint: 82AD709FEC4ECA4C84B093889BDC9DE410CFC23B
-    url: https://keybase.io/alexandref75/pgp_keys.asc
+    fingerprint: 71EDA4E3D652DC73EB09E3A5387D298C169CF24E
+    url: https://smarter-project.github.io/documentation/pgp_keys.asc

@@ -1,7 +1,7 @@
 apiVersion: v2
 name: smarter-demo
 description: smarter edge demo deployment chart
-
+home: https://getsmarter.io
 # A chart can be either an 'application' or a 'library' chart.
 #
 # Application charts are a collection of templates that can be packaged into versioned archives
@@ -15,7 +15,7 @@ type: application
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
-version: 0.1.0
+version: 0.1.1
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
@@ -32,24 +32,23 @@ dependencies:
     repository: https://fluent.github.io/helm-charts
     alias: fluent-bit
   - name: smarter-gstreamer
-    version: 0.0.1
-    repository: https://smarter-project.github.io/documentation/charts
+    version: 0.0.2
+    repository: https://smarter-project.github.io/gstreamer
   - name: smarter-pulseaudio
-    version: 0.0.1
-    repository: https://fluent.github.io/helm-charts/documentation/charts
+    version: 0.0.2
+    repository: https://smarter-project.github.io/pulseaudio
   - name: smarter-image-detector
-    version: 0.0.1
-    repository: https://fluent.github.io/helm-charts/documentation/charts
+    version: 0.0.2
+    repository: https://smarter-project.github.io/image-detector
   - name: smarter-audio-client
-    version: 0.0.1
-    repository: https://fluent.github.io/helm-charts/documentation/charts
-  - name: smarter-admission-controller
-    version: 0.0.1
-    repository: https://fluent.github.io/helm-charts/documentation/charts
-
+    version: 0.0.2
+    repository: https://smarter-project.github.io/audio-client
+  - name: smarter-inference
+    version: 0.0.2
+    repository: https://smarter-project.github.io/smarter-inference
+icon: https://gitlab.com/uploads/-/system/group/avatar/59012546/ARM1636_Project_Logo_ST2_RGB_V1.png
 sources:
-  - https://gitlab.com/smarter-project/documentation
-
+  - https://github.com/smarter-project/documentation
 annotations:
   artifacthub.io/changes: |
     - Initial release
@@ -59,5 +58,5 @@ annotations:
       email: ericvh@gmail.com
   artifacthub.io/prerelease: "false"
   artifacthub.io/signKey: |
-    fingerprint: 9696F0D196A59098A4CAD15188FFD5FB4A5FFF98
-    url: https://keybase.io/ericvh/pgp_keys.asc
+    fingerprint: 71EDA4E3D652DC73EB09E3A5387D298C169CF24E
+    url: https://smarter-project.github.io/documentation/pgp_keys.asc
