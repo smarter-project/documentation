@@ -45,4 +45,88 @@ entries:
     urls:
     - https://github.com/smarter-project/documentation/releases/download/smarter-cloud-0.1.2/smarter-cloud-0.1.2.tgz
     version: 0.1.2
-generated: "2022-11-08T04:06:55.753423746Z"
+  smarter-demo:
+  - annotations:
+      artifacthub.io/changes: |
+        - Initial release
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/maintainers: |
+        - name: Eric Van Hensbergen
+          email: ericvh@gmail.com
+      artifacthub.io/prerelease: "false"
+      artifacthub.io/signKey: |
+        fingerprint: 71EDA4E3D652DC73EB09E3A5387D298C169CF24E
+        url: https://smarter-project.github.io/documentation/pgp_keys.asc
+    apiVersion: v2
+    appVersion: 2.0.0
+    created: "2022-11-08T04:12:21.295435415Z"
+    dependencies:
+    - alias: fluent-bit
+      name: fluent-bit
+      repository: https://fluent.github.io/helm-charts
+      version: 0.20.9
+    - name: smarter-gstreamer
+      repository: https://smarter-project.github.io/gstreamer
+      version: 0.0.2
+    - name: smarter-pulseaudio
+      repository: https://smarter-project.github.io/pulseaudio
+      version: 0.0.2
+    - name: smarter-image-detector
+      repository: https://smarter-project.github.io/image-detector
+      version: 0.0.2
+    - name: smarter-audio-client
+      repository: https://smarter-project.github.io/audio-client
+      version: 0.0.2
+    - name: smarter-inference
+      repository: https://smarter-project.github.io/smarter-inference
+      version: 0.0.2
+    description: smarter edge demo deployment chart
+    digest: 03c82583e7eb30da0b2be753cb904a319d1c6437730f1fd2ebacd0a248d59f78
+    home: https://getsmarter.io
+    icon: https://gitlab.com/uploads/-/system/group/avatar/59012546/ARM1636_Project_Logo_ST2_RGB_V1.png
+    kubeVersion: '>=1.18.0-0'
+    name: smarter-demo
+    sources:
+    - https://github.com/smarter-project/documentation
+    type: application
+    urls:
+    - https://github.com/smarter-project/documentation/releases/download/smarter-demo-0.1.2/smarter-demo-0.1.2.tgz
+    version: 0.1.2
+  smarter-edge:
+  - annotations:
+      artifacthub.io/changes: |
+        - Initial release
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/maintainers: |
+        - name: Eric Van Hensbergen
+          email: ericvh@gmail.com
+      artifacthub.io/prerelease: "false"
+      artifacthub.io/signKey: |
+        fingerprint: 71EDA4E3D652DC73EB09E3A5387D298C169CF24E
+        url: https://smarter-project.github.io/documentation/pgp_keys.asc
+    apiVersion: v2
+    appVersion: 2.0.0
+    created: "2022-11-08T04:12:21.435700032Z"
+    dependencies:
+    - name: smarter-cni
+      repository: https://smarter-project.github.io/smarter-cni
+      version: 0.0.2
+    - name: smarter-dns
+      repository: https://smarter-project.github.io/smarter-dns
+      version: 0.0.2
+    - name: smarter-device-manager
+      repository: https://smarter-project.github.io/smarter-device-manager
+      version: 0.0.7
+    description: smarter edge deployment chart
+    digest: a135c6ff35119aef2b42d6487e73c8c0c9a36cdb20013dc3ff530b1acc98792a
+    home: https://getsmarter.io
+    icon: https://gitlab.com/uploads/-/system/group/avatar/59012546/ARM1636_Project_Logo_ST2_RGB_V1.png
+    kubeVersion: '>=1.18.0-0'
+    name: smarter-edge
+    sources:
+    - https://github.com/smarter-project/documentation
+    type: application
+    urls:
+    - https://github.com/smarter-project/documentation/releases/download/smarter-edge-0.0.4/smarter-edge-0.0.4.tgz
+    version: 0.0.4
+generated: "2022-11-08T04:12:21.435920935Z"
