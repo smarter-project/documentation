@@ -32,19 +32,19 @@ dependencies:
     repository: https://fluent.github.io/helm-charts
     alias: fluent-bit
   - name: smarter-gstreamer
-    version: 0.0.2
+    version: 0.0.4
     repository: https://smarter-project.github.io/gstreamer
   - name: smarter-pulseaudio
-    version: 0.0.2
+    version: 0.0.3
     repository: https://smarter-project.github.io/pulseaudio
   - name: smarter-image-detector
     version: 0.0.2
     repository: https://smarter-project.github.io/image-detector
   - name: smarter-audio-client
-    version: 0.0.2
+    version: 0.0.4
     repository: https://smarter-project.github.io/audio-client
   - name: smarter-inference
-    version: 0.0.2
+    version: 0.0.4
     repository: https://smarter-project.github.io/smarter-inference
 icon: https://gitlab.com/uploads/-/system/group/avatar/59012546/ARM1636_Project_Logo_ST2_RGB_V1.png
 sources:
