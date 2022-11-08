@@ -1,6 +1,6 @@
 apiVersion: v2
 name: smarter-cloud
-description: smarter cloud deploymnent chart
+description: smarter cloud deployment chart
 
 home: https://gitlab.com/smarter-project/documentation
 

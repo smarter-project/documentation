@@ -7,8 +7,7 @@ For more information on smarter go to https://getsmarter.io
 ## TL;DR
 
 ```console
-helm repo add smarter https://smarter-project.gitlab.io/documentation/charts
-helm install --set domain=example.com demo smarter/demo
+helm install --set domain=example.com demo charts/demo
 ```
 
 # Overview

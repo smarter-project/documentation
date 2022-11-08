@@ -1,6 +1,6 @@
 apiVersion: v2
 name: smarter-edge
-description: smarter edge deploymnent chart
+description: smarter edge deployment chart
 
 home: https://getsmarter.io
 
