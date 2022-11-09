@@ -1,0 +1,12 @@
+include: 
+  - index.yaml
+  - pgp_keys.asc
+  - artifacthub-repo.yml
+ keep: 
+  - index.yaml
+  - pgp_keys.asc
+  - artifacthub-repo.yml
+ exclude:
+  - charts
+  - .github/workflows
+  
