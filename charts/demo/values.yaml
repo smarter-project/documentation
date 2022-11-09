@@ -5,7 +5,7 @@
 global:
   domain: example.com
 
-fluent-bit:
+smarter-fluent-bit:
   fluentd:
     host: fluentbit
     port: 30224

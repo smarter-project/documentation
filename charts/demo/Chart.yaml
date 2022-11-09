@@ -38,7 +38,7 @@ dependencies:
     version: 0.0.3
     repository: https://smarter-project.github.io/pulseaudio
   - name: smarter-image-detector
-    version: 0.0.2
+    version: 0.0.4
     repository: https://smarter-project.github.io/image-detector
   - name: smarter-audio-client
     version: 0.0.4
