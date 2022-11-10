@@ -1,7 +1,7 @@
 # smarter-edge
 
 This chart deploys all the edge components and infrastructure for SMARTER including
-cni, dns and smarter-device-manager and creates a single lable that installs a pod for each in a node, smarter-edge=enabled.
+cni, dns and smarter-device-manager and creates a single label that installs a pod for each in a node, smarter-edge=enabled.
 
 
 For more information on smarter go to https://getsmarter.io

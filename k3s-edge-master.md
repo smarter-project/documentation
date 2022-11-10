@@ -51,7 +51,7 @@ The script will create another local script that can be used to restart k3s if n
 The files token.\<instance name\> and kube.\<instance name\>.config contains the credentials to be use to authenticate a node (token file) or kubectl (kube.config file).
 *NOTE*: Is is important K3S_VERSION on client matches the server otherwise things are likely not to work
 The k3s-start.sh downloads a compatible k3s executable (that can replace kubectl) with the server and also creates a kubectl-\<instance name\>.sh script that emulates a kubectl with the correct credentials.
-The file env-<instance name>.sh create an alias for kubectl and adds the KUBECONFIG enviroment variable. 
+The file env-\<instance name\>.sh create an alias for kubectl and adds the KUBECONFIG enviroment variable. 
 
 # Joining a non-yocto k3s node
 To join an node which does not use our yocto build. Copy the kube_edge_install-\<instance name\>.sh to the node and execute it. The script is already configured to connect to the server \<instance name\>.  

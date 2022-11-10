@@ -1,0 +1,4 @@
+.vscode
+scripts/*
+!scripts/k3s-cloud-start.sh
+!scripts/k3s-start.sh

@@ -3,7 +3,7 @@
 
 # Identification of the server, used for directories names and disambiguate tokens and KUBECONFIG files
 SERVERNAME=${SERVERNAME:-default_smarter}
-# Especific port to be used at the server
+# Specific port to be used at the server
 HOSTPORT=${HOSTPORT:-6443}
 # IP that the clients will be used to connect (If on the cloud it will probably be the external IP of the server)
 # HOSTIP
@@ -121,7 +121,7 @@ then
 		exit 1
 	fi
 fi
-echo "k3s_${SERVERNAME} is running, access thois instance using the credentials at this directory"
+echo "k3s_${SERVERNAME} is running, access this instance using the credentials at this directory"
 
 exit 0
 EOF
@@ -202,6 +202,6 @@ EOF
 	chmod u+x "${KUBECTL_EDGE_INSTALL_FILE}"
 fi
 
-echo "an useful trick is to create an alias for shell like: alias kubectl='$(pwd)/${KUBECTL_FILE}', if that is your only k3s running"
+echo "A useful trick is to create an alias for shell like: alias kubectl='$(pwd)/${KUBECTL_FILE}', if that is your only k3s running"
 
 exit 0
