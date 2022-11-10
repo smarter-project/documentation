@@ -39,7 +39,7 @@ In the case you wish to deploy the demo we assume you have done the following:
    ```bash
    helm install --namespace smarter --create-namespace smarter-edge chart
    ```
-- Use the helm chart on each of hte modules. Remember to use the namespace and the correct labels. The individual charts do not install on devices automatically, they require labels.
+- Use the helm chart on each of the modules. Remember to use the namespace and the correct labels. The individual charts do not install on devices automatically, they require labels.
 
 ## To setup your registered edge node from your development machine
 Plugin USB camera. You should be able to see the camera at `/dev/video0`.
