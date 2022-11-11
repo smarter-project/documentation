@@ -59,6 +59,52 @@ entries:
         url: https://smarter-project.github.io/documentation/pgp_keys.asc
     apiVersion: v2
     appVersion: 2.0.0
+    created: "2022-11-11T19:58:57.254265173Z"
+    dependencies:
+    - alias: smarter-fluent-bit
+      name: fluent-bit
+      repository: file://../smarter-fluent-bit
+      version: 0.20.9
+    - name: smarter-gstreamer
+      repository: https://smarter-project.github.io/gstreamer
+      version: 0.0.4
+    - name: smarter-pulseaudio
+      repository: https://smarter-project.github.io/pulseaudio
+      version: 0.0.3
+    - name: smarter-image-detector
+      repository: https://smarter-project.github.io/image-detector
+      version: 0.0.5
+    - name: smarter-audio-client
+      repository: https://smarter-project.github.io/audio-client
+      version: 0.0.5
+    - name: smarter-inference
+      repository: https://smarter-project.github.io/smarter-inference
+      version: 0.0.4
+    description: smarter edge demo deployment chart
+    digest: 397c7fd569d9fd1cb2aef6a95eea06476de15f4a7b1649cef25bf6ca31f51a58
+    home: https://getsmarter.io
+    icon: https://gitlab.com/uploads/-/system/group/avatar/59012546/ARM1636_Project_Logo_ST2_RGB_V1.png
+    kubeVersion: '>=1.18.0-0'
+    name: smarter-demo
+    sources:
+    - https://github.com/smarter-project/documentation
+    type: application
+    urls:
+    - https://github.com/smarter-project/documentation/releases/download/smarter-demo-0.1.4/smarter-demo-0.1.4.tgz
+    version: 0.1.4
+  - annotations:
+      artifacthub.io/changes: |
+        - Initial release
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/maintainers: |
+        - name: Eric Van Hensbergen
+          email: ericvh@gmail.com
+      artifacthub.io/prerelease: "false"
+      artifacthub.io/signKey: |
+        fingerprint: 71EDA4E3D652DC73EB09E3A5387D298C169CF24E
+        url: https://smarter-project.github.io/documentation/pgp_keys.asc
+    apiVersion: v2
+    appVersion: 2.0.0
     created: "2022-11-09T02:07:39.364672683Z"
     dependencies:
     - alias: smarter-fluent-bit
@@ -211,4 +257,4 @@ entries:
     urls:
     - https://github.com/smarter-project/documentation/releases/download/smarter-edge-0.0.4/smarter-edge-0.0.4.tgz
     version: 0.0.4
-generated: "2022-11-10T20:08:33.763037776Z"
+generated: "2022-11-11T19:58:57.254280173Z"
