@@ -1,0 +1,172 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name:  {{ .Values.application.appName }}-data
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  resources:
+    requests:
+      storage: 2Gi
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.application.appName }}
+data:
+  default.conf: |
+    user root root;
+    
+    worker_processes  auto;
+    
+    error_log  /var/log/nginx/error.log notice;
+    pid        /var/run/nginx.pid;
+    
+    events {
+        worker_connections  1024;
+    }
+    
+    
+    http {
+        include       /etc/nginx/mime.types;
+        default_type  application/octet-stream;
+    
+        log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                          '$status $body_bytes_sent "$http_referer" '
+                          '"$http_user_agent" "$http_x_forwarded_for"';
+    
+        access_log  /var/log/nginx/access.log  main;
+    
+        sendfile        on;
+        #tcp_nopush     on;
+    
+        keepalive_timeout  65;
+    
+        #gzip  on;
+    
+        server {
+            listen 80 default_server;
+            listen [::]:80 default_server;
+            server_name server_domain_or_IP;
+            return 302 https://$server_name$request_uri;
+        }
+        server {
+            disable_symlinks off;
+            # SSL configuration
+            listen {{ .Values.configuration.portHTTPS }} ssl http2 default_server;
+            listen [::]:{{ .Values.configuration.portHTTPS }} ssl http2 default_server;
+            ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
+            ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
+            # from https://cipherli.st/
+            # and https://raymii.org/s/tutorials/Strong_SSL_Security_On_nginx.html
+            ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+            ssl_prefer_server_ciphers on;
+            ssl_ciphers "EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH";
+            ssl_ecdh_curve secp384r1;
+            ssl_session_cache shared:SSL:10m;
+            ssl_session_tickets off;
+            ssl_stapling on;
+            ssl_stapling_verify on;
+            resolver 8.8.8.8 8.8.4.4 valid=300s;
+            resolver_timeout 5s;
+            # Disable preloading HSTS for now.  You can use the commented out header line that includes
+            # the "preload" directive if you understand the implications.
+            #add_header Strict-Transport-Security "max-age=63072000; includeSubdomains; preload";
+            add_header Strict-Transport-Security "max-age=63072000; includeSubdomains";
+            add_header X-Frame-Options DENY;
+            add_header X-Content-Type-Options nosniff;
+            ssl_dhparam /etc/ssl/certs/dhparam.pem;
+            root /var/www/html;
+            server_name _;
+            location / {
+                # First attempt to serve request as file, then
+                # as directory, then fall back to displaying a 404.
+                try_files $uri $uri/ =404;
+                # proxy_pass http://localhost:8080;
+                # proxy_http_version 1.1;
+                # proxy_set_header Upgrade $http_upgrade;
+                # proxy_set_header Connection 'upgrade';
+                # proxy_set_header Host $host;
+                # proxy_cache_bypass $http_upgrade;
+            }
+            # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+            #
+            #location ~ \.php$ {
+            # include snippets/fastcgi-php.conf;
+            #
+            #       # With php7.0-cgi alone:
+            #       fastcgi_pass 127.0.0.1:9000;
+            #       # With php7.0-fpm:
+            #       fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+            #}
+            # deny access to .htaccess files, if Apache's document root
+            # concurs with nginx's one
+            #
+            #location ~ /\.ht {
+            #       deny all;
+            #}
+       }
+    }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.application.appName }}
+  labels:
+    name: {{ .Values.application.appName }}
+spec:
+  selector:
+    matchLabels:
+      name: {{ .Values.application.appName }}
+  template:
+    metadata:
+      labels: 
+        name: {{ .Values.application.appName }}
+      annotations:
+        node.kubernetes.io/bootstrap-checkpoint: "true"
+    spec: 
+      containers:
+      - name: {{ .Values.application.appName }}
+        image: {{ .Values.image.repository }}:{{ default .Chart.AppVersion .Values.image.tag }}
+        command: [ "/bin/k3s",
+                   "server", 
+                   "--tls-san","{{ .Values.configuration.hostip }}",
+                   "--advertise-address", "{{ default .Values.configuration.hostIP .Values.configuration.externalHostIP}}",
+                   "--https-listen-port", "{{ .Values.configuration.port }}",
+                   "--disable-agent",
+                   "--disable","traefik",
+                   "--disable","metrics-server",
+                   "--disable","coredns",
+                   "--disable","local-storage",
+                   "--flannel-backend=none" ]
+        volumeMounts:
+        - name: k3s-data
+          mountPath: /var/lib/rancher/k3s
+        - name: k3s-config
+          mountPath: /etc/rancher/k3s
+        ports:
+        - containerPort: {{ .Values.configuration.port }}
+      - name: {{ .Values.application.appName }}-nginx
+        image: nginx:1.23.2-alpine
+        command: [ "/bin/sh",
+                   "-c", 
+                   "apk update;apk add openssl;echo -e '\n\n\n\n\n\n\n' | openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt;openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048;mkdir -p /var/www/html;ln -s /etc/rancher/k3s/k3s.yaml /var/www/html/k3s.yaml.{{ .Values.configuration.id }};ln -s /var/lib/rancher/k3s/server/token /var/www/html/token.{{ .Values.configuration.id }};chmod -R ago+rw /var/www/html;nginx -c /etc/nginx/conf.d/default.conf -g 'daemon off;'" ]
+        volumeMounts:
+        - name: k3s-data
+          mountPath: /var/lib/rancher/k3s
+        - name: k3s-config
+          mountPath: /etc/rancher/k3s
+        - name: config
+          mountPath: /etc/nginx/conf.d
+        ports:
+        - containerPort: {{ .Values.configuration.portHTTPS }}
+      volumes:
+      - name: k3s-data
+        persistentVolumeClaim:
+          claimName: {{ .Values.application.appName }}-data
+      - name: k3s-config
+        emptyDir: {}
+      - name: config
+        configMap:
+          name: {{ .Values.application.appName }}
