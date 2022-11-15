@@ -1,3 +1,4 @@
+{{- if .Values.configuration.portHTTPS }}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -109,6 +110,7 @@ data:
        }
     }
 ---
+{{- end }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -140,13 +142,16 @@ spec:
                    "--disable","coredns",
                    "--disable","local-storage",
                    "--flannel-backend=none" ]
+        {{- if .Values.configuration.portHTTPS }}
         volumeMounts:
         - name: k3s-data
           mountPath: /var/lib/rancher/k3s
         - name: k3s-config
           mountPath: /etc/rancher/k3s
+        {{- end }}
         ports:
         - containerPort: {{ .Values.configuration.port }}
+      {{- if .Values.configuration.portHTTPS }}
       - name: {{ .Values.application.appName }}-nginx
         image: nginx:1.23.2-alpine
         command: [ "/bin/sh",
@@ -161,7 +166,9 @@ spec:
           mountPath: /etc/nginx/conf.d
         ports:
         - containerPort: {{ .Values.configuration.portHTTPS }}
+      {{- end }}
       volumes:
+      {{- if .Values.configuration.portHTTPS }}
       - name: k3s-data
         persistentVolumeClaim:
           claimName: {{ .Values.application.appName }}-data
@@ -170,3 +177,4 @@ spec:
       - name: config
         configMap:
           name: {{ .Values.application.appName }}
+      {{- end }}
