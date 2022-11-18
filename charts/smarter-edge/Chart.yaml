@@ -29,7 +29,7 @@ kubeVersion: ">=1.18.0-0"
 
 dependencies:
   - name: smarter-cni
-    version: 0.0.3
+    version: 0.0.5
     repository: https://smarter-project.github.io/smarter-cni
   - name: smarter-dns
     version: 0.0.4
