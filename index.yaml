@@ -198,6 +198,42 @@ entries:
         url: https://smarter-project.github.io/documentation/pgp_keys.asc
     apiVersion: v2
     appVersion: 2.0.0
+    created: "2022-11-21T17:50:24.256641676Z"
+    dependencies:
+    - name: smarter-cni
+      repository: https://smarter-project.github.io/smarter-cni
+      version: 0.0.6
+    - name: smarter-dns
+      repository: https://smarter-project.github.io/smarter-dns
+      version: 0.0.4
+    - name: smarter-device-manager
+      repository: https://smarter-project.github.io/smarter-device-manager
+      version: 0.0.7
+    description: smarter edge deployment chart
+    digest: 5276935da9b661256b7792fc2124bd16e28cbb41237fbd8533ac24026be3c64e
+    home: https://getsmarter.io
+    icon: https://gitlab.com/uploads/-/system/group/avatar/59012546/ARM1636_Project_Logo_ST2_RGB_V1.png
+    kubeVersion: '>=1.18.0-0'
+    name: smarter-edge
+    sources:
+    - https://github.com/smarter-project/documentation
+    type: application
+    urls:
+    - https://github.com/smarter-project/documentation/releases/download/smarter-edge-0.0.7/smarter-edge-0.0.7.tgz
+    version: 0.0.7
+  - annotations:
+      artifacthub.io/changes: |
+        - Initial release
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/maintainers: |
+        - name: Eric Van Hensbergen
+          email: ericvh@gmail.com
+      artifacthub.io/prerelease: "false"
+      artifacthub.io/signKey: |
+        fingerprint: 71EDA4E3D652DC73EB09E3A5387D298C169CF24E
+        url: https://smarter-project.github.io/documentation/pgp_keys.asc
+    apiVersion: v2
+    appVersion: 2.0.0
     created: "2022-11-18T16:25:28.694443201Z"
     dependencies:
     - name: smarter-cni
@@ -293,4 +329,4 @@ entries:
     urls:
     - https://github.com/smarter-project/documentation/releases/download/smarter-edge-0.0.4/smarter-edge-0.0.4.tgz
     version: 0.0.4
-generated: "2022-11-18T16:25:28.694456001Z"
+generated: "2022-11-21T17:50:24.256947298Z"
