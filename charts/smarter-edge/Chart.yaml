@@ -32,7 +32,7 @@ dependencies:
     version: 0.0.8
     repository: https://smarter-project.github.io/smarter-cni
   - name: smarter-dns
-    version: 0.0.6
+    version: 0.0.7
     repository: https://smarter-project.github.io/smarter-dns
   - name: smarter-device-manager
     version: 0.0.7
