@@ -2,7 +2,7 @@ apiVersion: v2
 name: smarter-cloud
 description: smarter cloud deployment chart
 
-home: https://gitlab.com/smarter-project/documentation
+home: https://getsmarter.io
 
 # A chart can be either an 'application' or a 'library' chart.
 #
@@ -45,9 +45,9 @@ dependencies:
     repository: https://fluent.github.io/helm-charts
     alias: fluent-bit
 
-icon: https://gitlab.com/uploads/-/system/group/avatar/59012546/ARM1636_Project_Logo_ST2_RGB_V1.png
+icon: https://github.com/smarter-project/documentation/raw/main/ARM1636_Project_Logo_ST2_RGB_V1.png
 sources:
-  - https://gitlab.com/smarter-project/documentation
+  - https://github.com/smarter-project/documentation
 
 annotations:
   artifacthub.io/changes: |
