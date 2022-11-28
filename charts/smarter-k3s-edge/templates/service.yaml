@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.application.appName }}
+  labels:
+    name: {{ .Values.application.appName }}
+spec:
+  selector:
+    name: {{ .Values.application.appName }}
+  ports:
+    - protocol: TCP
+      port: {{ .Values.configuration.port }}
+      name: {{ .Values.application.appName }}
+    {{- if .Values.configuration.portHTTPS }}
+    - protocol: TCP
+      port: {{ .Values.configuration.portHTTPS }}
+      name: {{ .Values.application.appName }}-https
+    {{- end }}
+  externalIPs:
+    - {{ .Values.configuration.hostIP }}

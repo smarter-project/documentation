@@ -14,7 +14,7 @@ This document will help you run a Smarter k3s server
 * Storage: At least 10GB
 
 ### k3s edge server
-* Local linux (x86_64 or arm64)/windows/MacOS machine with docker, AWS EC2 VM instance or Google Cloud Platform GCE VM instance
+* The k3s edge server can be installed on Baremetal, docker or on a kubernetes cluster (AWS EKS, Google GCE, etc...).
 * Multiple k3s edge servers can be run in a single server if different server ports are used (HOSTPORT).
 
 ### dev machine
@@ -31,7 +31,23 @@ This document will help you run a Smarter k3s server
 Make sure you open port 6443 or the port used in your instance installation in your firewall so external hosts can contact your new server.
 On AWS, you will need to do this by editing the security group policy and adding an inbound rule.
 
-## Setting k3s server up
+## Installing k3s
+
+### Kubernetes
+
+The helm chart [smarter-k3s-edge](./charts/smarter-k3s-edge) allows a k3s server to be installed in a Kubernetes cluster. Configuration ID should be a ssecure value (long enough to not be easy to guess). 
+```helm
+helm install --set configuration.id=XXXXXX smarter-k3s-edge chart/smarter-k3s-edge
+```
+
+The k3s-install.sh script can be downloaded at the edge nodes by using the command:
+```bash
+curl -sflk https://<external IP>:<portHTTPS>/k3s-start.sh.<configuration.id> | sh
+```
+
+### Docker 
+
+Setting k3s server up
 
 [k3s](https://github.com/k3s-io/k3s) repository and [Rancher docker hub](https://hub.docker.com/r/rancher/k3s/) provide docker images and artifacts (k3s) allowing k3s to run as container.
 This repository provides the file [k3s-start.sh](./scripts/k3s-start.sh) that automates that process and runs a k3s suitable to be a SMARTER k3s server

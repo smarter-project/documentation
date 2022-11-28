@@ -4,11 +4,11 @@
 ## This demo makes the following assumptions about your environment
 
 In this guide we assume you have done the following:
-- You should have a cloud-based k3s server dedicated for edge deployment (we will refer to this as k3s-edge-server) before proceeding any further
-    - if you don't have a k3s-edge-server, you can follow [these instructions](./k3s-edge-server.md)
-- You should also have an installed InfluxDB and Grafana instance in a separate kubernetes cluster
+- You should have an installed InfluxDB and Grafana instance in a separate kubernetes cluster (cloud or local).
     - these may be installed on a second cloud node, with its own k3s server, we will refer to this as the cloud-data-node
     - if you don't have a cloud-data-node, you can follow [these instructions](./k3s-cloud-server.md)
+- You should have a cloud-based k3s server dedicated for edge deployment (we will refer to this as k3s-edge-server) before proceeding any further
+    - if you don't have a k3s-edge-server, you can follow [these instructions](./k3s-edge-server.md)
 - You will also need an installed k3s edge node which has already been setup to talk to k3s-edge-server
     - instructions for registering a node running a **64 bit kernel and user space** are available [here](./k3s-edge-server.md#Joining a k3s edge node to the cluster)
 
