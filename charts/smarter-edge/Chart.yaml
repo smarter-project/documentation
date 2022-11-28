@@ -35,7 +35,7 @@ dependencies:
     version: 0.0.8
     repository: https://smarter-project.github.io/smarter-dns
   - name: smarter-device-manager
-    version: 0.0.7
+    version: 0.0.9
     repository: https://smarter-project.github.io/smarter-device-manager
 
 icon: https://gitlab.com/uploads/-/system/group/avatar/59012546/ARM1636_Project_Logo_ST2_RGB_V1.png
