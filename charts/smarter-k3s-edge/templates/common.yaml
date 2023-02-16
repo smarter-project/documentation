@@ -151,8 +151,8 @@ spec:
         image: {{ .Values.image.repository }}:{{ default .Chart.AppVersion .Values.image.tag }}
         command: [ "/bin/k3s",
                    "server", 
-                   "--tls-san","{{ .Values.configuration.hostip }}",
-                   "--advertise-address", "{{ default .Values.configuration.hostIP .Values.configuration.externalHostIP}}",
+                   "--tls-san","{{ default .Values.configuration.hostIP .Values.configuration.externalHostIP }}",
+                   "--advertise-address", "{{ default .Values.configuration.hostIP .Values.configuration.externalHostIP }}",
                    "--https-listen-port", "{{ .Values.configuration.port }}",
                    "--disable-agent",
                    "--disable","traefik",
