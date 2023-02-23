@@ -118,14 +118,14 @@ data:
     export K3S_TOKEN=$(cat token.{{ .Values.configuration.id }})
     export K3S_URL=$(grep server: k3s.yaml.{{ .Values.configuration.id }} | sed -e "s/^ *.server: *//")
 
-    curl -sfL https://get.k3s.io | \\
-    sh -s - \\
-      --kubelet-arg cluster-dns=169.254.0.2 \\
-      --log /var/log/k3s.log \\
-      --node-label smarter.nodetype=unknown \\
-      --node-label smarter.nodemodel=unknown \\
-      --node-label smarter.type=edge \\
-      --node-taint smarter.type=edge:NoSchedule \\
+    curl -sfL https://get.k3s.io | \
+    sh -s - \
+      --kubelet-arg cluster-dns=169.254.0.2 \
+      --log /var/log/k3s.log \
+      --node-label smarter.nodetype=unknown \
+      --node-label smarter.nodemodel=unknown \
+      --node-label smarter.type=edge \
+      --node-taint smarter.type=edge:NoSchedule \
       --node-label smarter-build=user-installed 
   nginx-start.sh: |
     #!/bin/bash
