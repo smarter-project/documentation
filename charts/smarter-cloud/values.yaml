@@ -2,6 +2,7 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+host: grafana
 domain: example.com
 
 cert-manager:
