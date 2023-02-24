@@ -126,6 +126,14 @@ data:
       --node-label smarter.nodemodel=unknown \
       --node-label smarter.type=edge \
       --node-taint smarter.type=edge:NoSchedule \
+      {{- if .Values.configuration.smarter_demo_labels }}
+      --node-label smarter-audio-client=enabled \
+      --node-label smarter-gstreamer=enabled \
+      --node-label smarter-image-detector=enabled \
+      --node-label smarter-pulseaudio=enabled \
+      --node-label smarter-inference=enabled \
+      --node-label smarter-fluent-bit=enabled \
+      {{- end }}
       --node-label smarter-build=user-installed 
   nginx-start.sh: |
     #!/bin/bash
