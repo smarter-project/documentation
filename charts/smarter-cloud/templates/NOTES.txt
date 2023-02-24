@@ -2,5 +2,5 @@ Your SMARTER cloud instance has been deployed.  Next deploy an edge server and e
 For more details and instructions go to https://getsmarter.io
 
 If you deployed your instance correctly, you should be able to log into grafana at
-https://grafana.{{ .Values.domain }} with the username admin and the password {{ .Values.prometheus.grafana.adminPassword }}
+https://{{ .Values.host }}.{{ .Values.domain }} with the username admin and the password {{ .Values.prometheus.grafana.adminPassword }}
 
