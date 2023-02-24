@@ -16,4 +16,5 @@ configuration:
   port: 6443
   # Comment to remove NGINX
   portHTTPS: 6453
-  # set id to paqssword
+  # Uncomment to enable labeling for smarter-demo
+  #smarter_demo_labels: true
