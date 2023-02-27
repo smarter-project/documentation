@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 locals {
-  deployment_name = "smarter-alex"
+  deployment_name = "smarter-testing"
 }
 
 data "aws_vpc" "vpc" {
@@ -21,6 +21,15 @@ resource "aws_security_group" "sg" {
     ipv6_cidr_blocks = ["::/0"]
     from_port         = 22
     to_port           = 22
+    protocol          = "tcp"
+  }
+
+  ingress {
+    description      = "allow_http"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+    from_port         = 80
+    to_port           = 80
     protocol          = "tcp"
   }
 
@@ -102,21 +111,22 @@ module "k3s" {
   }
 
   assign_public_ip   = true
-  deployment_name    = "smarter-alex"
+  deployment_name    = "smarter-testing"
   instance_type      = "t3a.medium"
   #ami_id = ami-0333305f9719618c7 (ubuntu 22.04 20230115)
   subnet_id          = "subnet-0a0e6c54239cf12fc"
   keypair_content    = module.ssh_key_pair.public_key
   security_group_ids = [aws_security_group.sg.id]
   kubeconfig_mode    = "644"
-  letsencrypt_email  = "alexandre.ferreira@arm.com"
-
+  letsencrypt_email  = "xxx@yyy.com"
 }
 
 output "k3s_master_public_dns" {
   value = module.k3s.instance.public_dns
+  description = "EC2 instance name allocated"
 }
 
 output "k3s_edge" {
   value = module.k3s.k3s_edge.result
+  description = "System-wide password: grafana admin, k3s-edge ID"
 }
