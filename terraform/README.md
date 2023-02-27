@@ -10,6 +10,7 @@ deployment-name (locals): terraform name for this deployment, also used for helm
 Move to the directory example/single-node and update the smarter-main.tf variables: deployment-name and letsencrypt_email to be valid
 Run the following command from the directory example/single-node:
 ```
+terraform init
 terraform apply
 ```
 

@@ -114,7 +114,7 @@ module "k3s" {
   deployment_name    = "smarter-testing"
   instance_type      = "t3a.medium"
   #ami_id = ami-0333305f9719618c7 (ubuntu 22.04 20230115)
-  subnet_id          = "subnet-0a0e6c54239cf12fc"
+  #subnet_id          = "subnet-xxxxx" #If there is no default subnet 
   keypair_content    = module.ssh_key_pair.public_key
   security_group_ids = [aws_security_group.sg.id]
   kubeconfig_mode    = "644"
