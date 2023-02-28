@@ -12,7 +12,7 @@ data "aws_vpc" "vpc" {
 }
 
 resource "aws_security_group" "sg" {
-  name   = "allow_smarter"
+  name   = "allow-${local.deployment_name}"
   vpc_id = data.aws_vpc.vpc.id
 
   ingress {
@@ -61,15 +61,6 @@ resource "aws_security_group" "sg" {
   }
 
   ingress {
-    description      = "allow_k3s_https_inbound"
-    cidr_blocks      = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
-    from_port        = 6446
-    to_port          = 6446
-    protocol         = "tcp"
-  }
-
-  ingress {
     description      = "allow_fluentbit_inbound"
     cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
@@ -87,7 +78,7 @@ resource "aws_security_group" "sg" {
   }
 
   tags = {
-    Name = "allow_smarter"
+    Name = "allow-${local.deployment_name}"
   }
 }
 
@@ -111,7 +102,7 @@ module "k3s" {
   }
 
   assign_public_ip   = true
-  deployment_name    = "smarter-testing"
+  deployment_name    = local.deployment_name
   instance_type      = "t3a.medium"
   #ami_id = ami-0333305f9719618c7 (ubuntu 22.04 20230115)
   #subnet_id          = "subnet-xxxxx" #If there is no default subnet 
