@@ -33,6 +33,6 @@ Helm was used to install charts and can be used to manage them by setting the co
 
 The edge devices can be installed (Raspberry pi4 for example) by running the following script. The command will install k3s agent and connect that to the k3s edge running on the ec2 instanct. The command will install k3s agent and connect that to the k3s edge running on the ec2 instance.
 ```
-wget --no-check-certificate https://<EC2 instance name>:6446/k3s-start.sh.<password/ID> | bash -s -
+wget https://k3s-<<External IP of EC2 separated with dash>.nio.io/k3s-start.sh.<password/ID> | bash -s -
 ```
 
