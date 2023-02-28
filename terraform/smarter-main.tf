@@ -95,7 +95,7 @@ module "ssh_key_pair" {
 }
 
 module "k3s" {
-  source = "../../"
+  source = "./k3s"
 
   providers = {
     aws = aws
