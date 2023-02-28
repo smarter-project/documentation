@@ -10,11 +10,16 @@ image:
   pullPolicy: IfNotPresent
 
 configuration:
+  host: k3s-edge
+  domain: example.com
   hostIP: 192.168.2.222
   # Use this in case of NATed AWS
-  #externalHostIP: 192.168.2.222
+  externalHostIP: 192.168.2.222
   port: 6443
   # Comment to remove NGINX
-  portHTTPS: 6453
+  portHTTP: 80
+  #portHTTPS: 6453
+  # Uncomment to enable traefik ingress
+  traefik: True
   # Uncomment to enable labeling for smarter-demo
   #smarter_demo_labels: true

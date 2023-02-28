@@ -1,0 +1,25 @@
+{{- if .Values.configuration.traefik }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}-k3s-edge-ingress
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    cert-manager.io/cluster-issuer: cert-manager-acme-issuer
+spec:
+  rules:
+  - host: {{ .Values.configuration.host }}.{{ .Values.configuration.domain }}
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ .Release.Name }}-k3s-edge
+            port:
+              number: {{ .Values.configuration.portHTTP }}
+  tls:
+    - secretName: {{ .Release.Name }}-k3s-edge-tls
+      hosts:
+        - {{ .Values.configuration.host }}.{{ .Values.configuration.domain }}
+{{- end }}
