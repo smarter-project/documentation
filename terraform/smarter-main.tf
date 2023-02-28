@@ -109,7 +109,7 @@ module "k3s" {
   keypair_content    = module.ssh_key_pair.public_key
   security_group_ids = [aws_security_group.sg.id]
   kubeconfig_mode    = "644"
-  letsencrypt_email  = "xxx@yyy.com"
+  #letsencrypt_email  = "xxx@yyy.com"
 }
 
 output "k3s_master_public_dns" {
