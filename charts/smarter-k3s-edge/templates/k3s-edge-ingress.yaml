@@ -15,7 +15,7 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: {{ .Release.Name }}-k3s-edge
+            name: {{ .Values.application.appName }}
             port:
               number: {{ .Values.configuration.portHTTP }}
   tls:

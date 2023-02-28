@@ -20,6 +20,6 @@ configuration:
   portHTTP: 80
   #portHTTPS: 6453
   # Uncomment to enable traefik ingress
-  traefik: True
+  #traefik: True
   # Uncomment to enable labeling for smarter-demo
   #smarter_demo_labels: true

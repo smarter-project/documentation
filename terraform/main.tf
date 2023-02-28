@@ -65,17 +65,17 @@ do
      sleep 5
 done
 echo "----- Adding smarter-cloud to k3s"
-sudo su - ubuntu bash -c "helm repo add smarter https://smarter-project.github.io/documentation;helm install my-smartercloud smarter/smarter-cloud --set email=${var.letsencrypt_email} --set host=$(curl http://169.254.169.254/latest/meta-data/public-hostname | cut -d "." -f 1 | sed -e "s/^ec2/grafana/") --set domain=nip.io --set prometheus.grafana.adminPassword=${random_string.k3s_edge_id.result} --wait"
+sudo su - ubuntu bash -c "helm repo add smarter https://smarter-project.github.io/documentation;helm install my-smartercloud smarter/smarter-cloud --set email=${var.letsencrypt_email} --set host=$(curl http://169.254.169.254/latest/meta-data/public-hostname | cut -d '.' -f 1 | sed -e 's/^ec2/grafana/') --set domain=nip.io --set prometheus.grafana.adminPassword=${random_string.k3s_edge_id.result} --wait"
 echo "----- Adding smarter-edge to k3s"
-sudo su - ubuntu bash -c "helm install my-smartercloud-edge smarter/smarter-k3s-edge --set configuration.externalHostIP=$ADVERTISE_IP --set configuration.hostIP=$LOCAL_IP --set configuration.port=6444 --set configuration.portHTTPS=6446 --set configuration.id='${random_string.k3s_edge_id.result}' --set configuration.smarter_demo_labels=true --wait"
+sudo su - ubuntu bash -c "helm install my-smartercloud-edge smarter/smarter-k3s-edge --set configuration.externalHostIP=$ADVERTISE_IP --set configuration.hostIP=$LOCAL_IP --set configuration.port=6444 --set configuration.portHTTP=80 --set configuration.id='${random_string.k3s_edge_id.result}' --set configuration.smarter_demo_labels=true --set configuration.host=$(curl http://169.254.169.254/latest/meta-data/public-hostname | cut -d '.' -f 1 | sed -e 's/^ec2/k3s/') --set configuration.domain=nip.io --set configuration.traefik=true --wait"
 echo "----- Waiting for k3s.yaml from k3s-edge"
 until [ -f /home/ubuntu/k3s.yaml.${random_string.k3s_edge_id.result} ]
 do
-     sudo su - ubuntu bash -c "wget --no-check-certificate  https://$ADVERTISE_IP:6446/k3s.yaml.${random_string.k3s_edge_id.result}"
+     sudo su - ubuntu bash -c "wget http://$ADVERTISE_IP:80/k3s.yaml.${random_string.k3s_edge_id.result}"
      sleep 5
 done
 echo "----- Adding smarter-edge to k3s-edge"
-sudo su - ubuntu bash -c "export KUBECONFIG=/home/ubuntu/k3s.yaml.${random_string.k3s_edge_id.result};helm install --create-namespace --namespace smarter my-smartercloud-edge smarter/smarter-edge --wait;helm install --create-namespace --namespace smarter --set global.domain=$(curl http://169.254.169.254/latest/meta-data/public-hostname | cut -d "." -f 2-) --set smarter-fluent-bit.fluentd.host=$(curl http://169.254.169.254/latest/meta-data/public-hostname | cut -d "." -f 1) my-smartercloud-demo smarter/smarter-demo --wait"
+sudo su - ubuntu bash -c "export KUBECONFIG=/home/ubuntu/k3s.yaml.${random_string.k3s_edge_id.result};helm install --create-namespace --namespace smarter my-smartercloud-edge smarter/smarter-edge --wait;helm install --create-namespace --namespace smarter --set global.domain=$(curl http://169.254.169.254/latest/meta-data/public-hostname | cut -d '.' -f 2-) --set smarter-fluent-bit.fluentd.host=$(curl http://169.254.169.254/latest/meta-data/public-hostname | cut -d '.' -f 1) my-smartercloud-demo smarter/smarter-demo --wait"
 echo "----- Finished installing"
 EOF
     content_type = "text/x-shellscript"
