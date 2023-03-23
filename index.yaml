@@ -647,6 +647,30 @@ entries:
         url: https://smarter-project.github.io/documentation/pgp_keys.asc
     apiVersion: v2
     appVersion: v1.25.3-k3s1
+    created: "2023-03-23T20:25:43.412301429Z"
+    description: K3s server on kubernetes
+    digest: 0042d3e6d1b9591bbbe903b3d897c344a4286154782f96845cc90f8f7a7914ce
+    home: https://k3s.io/
+    icon: https://k3s.io/img/k3s-logo-light.svg
+    keywords:
+    - k3s
+    - edge
+    name: smarter-k3s-edge
+    type: application
+    urls:
+    - https://github.com/smarter-project/documentation/releases/download/smarter-k3s-edge-0.0.7/smarter-k3s-edge-0.0.7.tgz
+    version: 0.0.7
+  - annotations:
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/maintainers: |
+        - name: Alexandre Ferreira
+          email: alexandref75@gmail.com
+      artifacthub.io/prerelease: "false"
+      artifacthub.io/signKey: |
+        fingerprint: 71EDA4E3D652DC73EB09E3A5387D298C169CF24E
+        url: https://smarter-project.github.io/documentation/pgp_keys.asc
+    apiVersion: v2
+    appVersion: v1.25.3-k3s1
     created: "2023-02-24T22:13:01.023952306Z"
     description: K3s server on kubernetes
     digest: 31b6f0e11a647340cac9e71ce3f9598cf0802eb5b4a2ab71a458d00d8db7dd59
@@ -755,4 +779,4 @@ entries:
     urls:
     - https://github.com/smarter-project/documentation/releases/download/smarter-k3s-edge-0.0.1/smarter-k3s-edge-0.0.1.tgz
     version: 0.0.1
-generated: "2023-02-24T22:13:01.023998606Z"
+generated: "2023-03-23T20:25:43.412347129Z"
