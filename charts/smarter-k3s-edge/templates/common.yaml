@@ -1,4 +1,4 @@
-{{- if .Values.configuration.portHTTPS }}
+{{- if or .Values.configuration.portHTTP .Values.configuration.portHTTPS }}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -47,13 +47,13 @@ data:
         #gzip  on;
     
         server {
-            listen 80 default_server;
-            listen [::]:80 default_server;
-            server_name server_domain_or_IP;
-            return 302 https://$server_name$request_uri;
-        }
-        server {
             disable_symlinks off;
+            {{- if .Values.configuration.portHTTP }} 
+            listen {{ .Values.configuration.portHTTP }} default_server;
+            listen [::]:{{ .Values.configuration.portHTTP }} default_server;
+            server_name server_domain_or_IP;
+            {{- end }}
+            {{- if .Values.configuration.portHTTPS }} i
             # SSL configuration
             listen {{ .Values.configuration.portHTTPS }} ssl http2 default_server;
             listen [::]:{{ .Values.configuration.portHTTPS }} ssl http2 default_server;
@@ -71,13 +71,14 @@ data:
             ssl_stapling_verify on;
             resolver 8.8.8.8 8.8.4.4 valid=300s;
             resolver_timeout 5s;
+            ssl_dhparam /etc/ssl/certs/dhparam.pem;
+            {{- end }}
             # Disable preloading HSTS for now.  You can use the commented out header line that includes
             # the "preload" directive if you understand the implications.
             #add_header Strict-Transport-Security "max-age=63072000; includeSubdomains; preload";
             add_header Strict-Transport-Security "max-age=63072000; includeSubdomains";
             add_header X-Frame-Options DENY;
             add_header X-Content-Type-Options nosniff;
-            ssl_dhparam /etc/ssl/certs/dhparam.pem;
             root /var/www/html;
             server_name _;
             location / {
@@ -112,8 +113,13 @@ data:
   k3s-start.sh: |
     #!/bin/bash
     #
+    {{- if .Values.configuration.traefik }}
+    curl -sflkO https://{{ .Values.configuration.host }}.{{ .Values.configuration.domain }}/token.{{ .Values.configuration.id }}
+    curl -sflkO https://{{ .Values.configuration.host }}.{{ .Values.configuration.domain }}/k3s.yaml.{{ .Values.configuration.id }}
+    {{- else }}
     curl -sflkO https://{{ default .Values.configuration.hostIP .Values.configuration.externalHostIP}}:{{ .Values.configuration.portHTTPS }}/token.{{ .Values.configuration.id }}
     curl -sflkO https://{{ default .Values.configuration.hostIP .Values.configuration.externalHostIP}}:{{ .Values.configuration.portHTTPS }}/k3s.yaml.{{ .Values.configuration.id }}
+    {{- end }}
     export INSTALL_K3S_VERSION=$(echo "{{ default .Chart.AppVersion .Values.image.tag }}" | sed -e "s/-k3/+k3/")
     export K3S_TOKEN=$(cat token.{{ .Values.configuration.id }})
     export K3S_URL=$(grep server: k3s.yaml.{{ .Values.configuration.id }} | sed -e "s/^ *.server: *//")
@@ -140,8 +146,10 @@ data:
     #
     apk update
     apk add openssl
+    {{- if .Values.configuration.portHTTPS }} i
     echo -e "US\n\n\nSmarter\n\n"{{ default .Values.configuration.hostIP .Values.configuration.externalHostIP }}"\n\n" | openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt
     openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
+    {{- end }}
     mkdir -p /var/www/html
     until [ -f /etc/rancher/k3s/k3s.yaml ]
     do
@@ -185,7 +193,7 @@ spec:
                    "--disable","coredns",
                    "--disable","local-storage",
                    "--flannel-backend=none" ]
-        {{- if .Values.configuration.portHTTPS }}
+        {{- if or .Values.configuration.portHTTP .Values.configuration.portHTTPS }}
         volumeMounts:
         - name: k3s-data
           mountPath: /var/lib/rancher/k3s
@@ -194,7 +202,7 @@ spec:
         {{- end }}
         ports:
         - containerPort: {{ .Values.configuration.port }}
-      {{- if .Values.configuration.portHTTPS }}
+      {{- if or .Values.configuration.portHTTP .Values.configuration.portHTTPS }}
       - name: {{ .Values.application.appName }}-nginx
         image: nginx:1.23.2-alpine
         command: [ "/bin/sh",
@@ -207,10 +215,15 @@ spec:
         - name: config
           mountPath: /etc/nginx/conf.d
         ports:
+        {{- if .Values.configuration.portHTTP }}
+        - containerPort: {{ .Values.configuration.portHTTP }}
+        {{- end }}
+        {{- if .Values.configuration.portHTTPS }}
         - containerPort: {{ .Values.configuration.portHTTPS }}
+        {{- end }}
       {{- end }}
       volumes:
-      {{- if .Values.configuration.portHTTPS }}
+      {{- if or .Values.configuration.portHTTP .Values.configuration.portHTTPS }}
       - name: k3s-data
         persistentVolumeClaim:
           claimName: {{ .Values.application.appName }}-data

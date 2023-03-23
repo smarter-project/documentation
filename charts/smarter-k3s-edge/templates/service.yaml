@@ -11,6 +11,11 @@ spec:
     - protocol: TCP
       port: {{ .Values.configuration.port }}
       name: {{ .Values.application.appName }}
+    {{- if .Values.configuration.portHTTP }}
+    - protocol: TCP
+      port: {{ .Values.configuration.portHTTP }}
+      name: {{ .Values.application.appName }}-http
+    {{- end }}
     {{- if .Values.configuration.portHTTPS }}
     - protocol: TCP
       port: {{ .Values.configuration.portHTTPS }}
