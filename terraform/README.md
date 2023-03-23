@@ -37,3 +37,13 @@ The edge devices can be installed (Raspberry pi4 for example) by running the fol
 wget https://k3s-<<External IP of EC2 separated with dash>.nio.io/k3s-start.sh.<password/ID> | bash -s -
 ```
 
+# Troubleshooting
+
+## AWS authentication
+
+Use the AWS credentials provided in the "Get credentials for ProjAdmins" page.
+Terraform expects the following environment variables: AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY and AWS_SESSION_TOKEN.
+
+## Networking
+
+If an error appear about "default subnet not found", a subnet was not defined ias default for the VPC. A subnet can be set in modules "k3s" object. Uncomment the subnet_id and use one valid for your VPC.
