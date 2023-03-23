@@ -1,6 +1,6 @@
 apiVersion: v2
 name: smarter-k3s-edge
-version: 0.0.7
+version: 0.0.8
 type: application
 appVersion: v1.25.3-k3s1
 description: K3s server on kubernetes
