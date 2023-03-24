@@ -15,11 +15,32 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: {{ .Values.application.appName }}
+            name: {{ .Values.application.appName }}-http
             port:
               number: {{ .Values.configuration.portHTTP }}
   tls:
     - secretName: {{ .Values.application.appName }}-tls
       hosts:
         - {{ .Values.configuration.host }}.{{ .Values.configuration.domain }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.application.appName }}-http
+  labels:
+    name: {{ .Values.application.appName }}
+spec:
+  selector:
+    name: {{ .Values.application.appName }}
+  ports:
+    {{- if .Values.configuration.portHTTP }}
+    - protocol: TCP
+      port: {{ .Values.configuration.portHTTP }}
+      name: {{ .Values.application.appName }}-http
+    {{- end }}
+    {{- if .Values.configuration.portHTTPS }}
+    - protocol: TCP
+      port: {{ .Values.configuration.portHTTPS }}
+      name: {{ .Values.application.appName }}-https
+    {{- end }}
 {{- end }}
