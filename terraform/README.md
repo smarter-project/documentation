@@ -47,3 +47,14 @@ Terraform expects the following environment variables: AWS_ACCESS_KEY_ID, AWS_SE
 ## Networking
 
 If an error appear about "default subnet not found", a subnet was not defined ias default for the VPC. A subnet can be set in modules "k3s" object. Uncomment the subnet_id and use one valid for your VPC.
+
+## Debugging information
+
+Log in to the EC2 machine  using the ssh command
+
+```bash
+ssh -i ssh/<deployment-name>-prod-k3s.pem ubuntu@<EC2 instance allocated>
+```
+
+Please take a look at the log at /var/log/cloud-init-output.log and /var/log/cloud-init.log at the EC2 machine to determine where the program failed
+The script that is executed is called part-002
