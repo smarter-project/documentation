@@ -11,6 +11,7 @@ spec:
     - protocol: TCP
       port: {{ .Values.configuration.port }}
       name: {{ .Values.application.appName }}
+    {{- if not .Values.configuration.traefik }}
     {{- if .Values.configuration.portHTTP }}
     - protocol: TCP
       port: {{ .Values.configuration.portHTTP }}
@@ -20,6 +21,7 @@ spec:
     - protocol: TCP
       port: {{ .Values.configuration.portHTTPS }}
       name: {{ .Values.application.appName }}-https
+    {{- end }}
     {{- end }}
   externalIPs:
     - {{ .Values.configuration.hostIP }}
