@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 locals {
-  deployment_name = "smarter-testing"
+  deployment_name = "smarter-testing-alex"
 }
 
 data "aws_vpc" "vpc" {
@@ -103,13 +103,16 @@ module "k3s" {
 
   assign_public_ip   = true
   deployment_name    = local.deployment_name
-  instance_type      = "t3a.medium"
+  #arm64 - Graviton instance
+  instance_type      = "t4g.medium"
+  #x86_64 - Graviton instance
+  #instance_type      = "t3a.medium"
   #ami_id = ami-0333305f9719618c7 (ubuntu 22.04 20230115)
-  #subnet_id          = "subnet-xxxxx" #If there is no default subnet 
+  subnet_id          = "subnet-0a0e6c54239cf12fc"
   keypair_content    = module.ssh_key_pair.public_key
   security_group_ids = [aws_security_group.sg.id]
   kubeconfig_mode    = "644"
-  #letsencrypt_email  = "xxx@yyy.com"
+  letsencrypt_email  = "alexandre.ferreira@arm.com"
 }
 
 output "k3s_master_public_dns" {
