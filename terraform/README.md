@@ -7,12 +7,11 @@ deployment-name (locals): terraform name for this deployment, also used for helm
 
 ## Running
 
-Update the smarter-main.tf variables: deployment-name and letsencrypt_email to be valid
 Run the following commands
 ```
 terraform init
-# optional: terraform plan
-terraform apply
+# optional: terraform plan -var "letsencrypt_email=<valid email>"
+terraform apply -var "letsencrypt_email=<valid email>"
 ```
 
 ## Outputs

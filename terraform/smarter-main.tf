@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 locals {
-  deployment_name = "smarter-testing"
+  deployment_name = "smarter-testing-alex"
 }
 
 data "aws_vpc" "vpc" {
@@ -107,11 +107,11 @@ module "k3s" {
   instance_type      = "t4g.medium"
   #x86_64 instance
   #instance_type      = "t3a.medium"
-  #subnet_id          = "subnet-"
+  #subnet_id          = "subnet-xxxxxx"
   keypair_content    = module.ssh_key_pair.public_key
   security_group_ids = [aws_security_group.sg.id]
   kubeconfig_mode    = "644"
-  #letsencrypt_email  = "xxxx@yyy.com"
+  letsencrypt_email  = var.letsencrypt_email
 }
 
 output "k3s_master_public_dns" {
@@ -123,3 +123,9 @@ output "k3s_edge" {
   value = module.k3s.k3s_edge.result
   description = "System-wide password: grafana admin, k3s-edge ID"
 }
+
+variable "letsencrypt_email" {
+  type        = string
+  description = "email to be used in let's encrypt"
+}
+
