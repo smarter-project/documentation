@@ -3,11 +3,20 @@
 It assumes that the enviroment variables AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY and AWS_SESSION_TOKEN are set correctly so terraform can access AWS.
 Set the following variables to correct values:
 region (provider "aws): AWS region to allocate an EC2 instance on.
-deployment-name (locals): terraform name for this deployment, also used for helm
+
+Required variables:
+
+*letsencrypt\_email
+
+Optional variables:
+
+* deployment\_name: Prefix to apply to object names.
+* AWS\_EC2\_instance\_type: instance type to be used
 
 ## Running
 
 Run the following commands
+
 ```
 terraform init
 # optional: terraform plan -var "letsencrypt_email=<valid email>"
