@@ -101,7 +101,7 @@ module "k3s" {
   deployment_name    = var.deployment_name
   instance_type      = var.AWS_EC2_instance_type
   #x86_64 instance
-  #subnet_id          = "subnet-xxxxxx"
+  subnet_id          = var.AWS_VPC_subnet_id
   keypair_content    = module.ssh_key_pair.public_key
   security_group_ids = [aws_security_group.sg.id]
   kubeconfig_mode    = "644"
@@ -134,5 +134,11 @@ variable "deployment_name" {
   type        = string
   description = "Prefix applied to all objects created by this terraform"
   default     = "smarter-testing"
+}
+
+variable "AWS_VPC_subnet_id" {
+  type        = string
+  description = "subnet_id use the default of the VPC if this is not defined"
+  default     = ""
 }
 
