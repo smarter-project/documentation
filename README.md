@@ -29,6 +29,13 @@ In this guide we assume you have done the following:
 - The node must be able to reach your k3s-edge-server and cloud-data-node via IP
 
 ## Deploy demo
+
+### Deploy using terraform
+
+If you have an AWS account, a terraform script is available on this repository at [Terraform readme](terraform/README.md). This script will allocate an AWS EC2 Graviton instance, install k3s and helm and install all the charts needed to run this demo. The only missing part is one or more edge nodes that the user needs to provide.
+
+### Step by step deployment
+
 - To deploy the base system components common to all edge nodes, as well as the demo applications, we opt to use **Helm v3**. To install helm on the device which you are managing your k3s edge cluster with, you can follow the guide [here](https://helm.sh/docs/intro/install/#from-script).
 - Ensure in your environment that your kubeconfig is set properly. As a quick sanity check you can run:
   ```bash
