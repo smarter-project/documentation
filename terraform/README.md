@@ -12,6 +12,7 @@ Optional variables:
 
 * deployment\_name: Prefix to apply to object names.
 * AWS\_EC2\_instance\_type: instance type to be used
+* AWS_VPC_subnet_id: subnet_id use the default of the VPC if this is not defined"
 
 ## Running
 
