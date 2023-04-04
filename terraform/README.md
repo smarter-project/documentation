@@ -1,5 +1,10 @@
 # Terraform script to install smarter on AWS EC2
 
+This script installs SMARTER example using helm charts into one AWS EC2 instance. 
+
+This figure shows the components of the application and where they reside. 
+![SMARTER](SMARTER_example.png)
+
 It assumes that the environment variables AWS\_ACCESS\_KEY\_ID, AWS\_SECRET\_ACCESS\_KEY and AWS\_SESSION\_TOKEN are set correctly so Terraform can access AWS.
 Set the following variables to correct values:
 region (provider "aws"): AWS region to allocate an EC2 instance on.
