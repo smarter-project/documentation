@@ -21,7 +21,7 @@ Optional variables:
 
 ## Running
 
-An smarter-variables.tfvars.template is provided that can be copied so all the variables are set in this file and referenced by the option -var-file="smarter-variables.tfvars" where smarter-variables.tfvars is the name of the file used to set the variables. Commented variables are ignored.
+An template.tfvars is provided that can be copied so all the variables are set in this file and referenced by the option -var-file="smarter-variables.tfvars" where smarter-variables.tfvars is the name of the file used to set the variables. Commented variables are ignored.
 
 ### Run the following commands if using the smarter-variables.tfvars optionn
 
@@ -67,7 +67,7 @@ Helm was used to install charts and can be used to manage them by setting the co
 The edge devices can be installed (Raspberry pi4 for example) by running the following script. The script will install a k3s agent and configure that agent to be a node for k3s edge running on the EC2 instance.
 
 ```
-wget https://k3s.<<External IP of EC2 separated with dash>.nip.io/k3s-start.sh.<password/ID> | bash -s -
+wget https://k3s.<External IP of EC2 separated with dash>.nip.io/k3s-start.sh.<password/ID> | bash -s -
 ```
 
 # Troubleshooting
@@ -75,7 +75,7 @@ wget https://k3s.<<External IP of EC2 separated with dash>.nip.io/k3s-start.sh.<
 ## AWS authentication
 
 Use the AWS credentials provided in the "Get credentials for ProjAdmins" page.
-_Terraform expects the following environment variables: AWS\_ACCESS\_KEY\_ID, AWS\_SECRET\_ACCESS\_KEY and AWS\_SESSION\_TOKEN.
+Terraform expects the following environment variables: AWS\_ACCESS\_KEY\_ID, AWS\_SECRET\_ACCESS\_KEY and AWS\_SESSION\_TOKEN.
 
 ## Networking
 
