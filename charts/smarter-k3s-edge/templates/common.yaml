@@ -81,7 +81,7 @@ data:
             add_header X-Content-Type-Options nosniff;
             root /var/www/html;
             server_name _;
-            location / {
+            location {{ .Values.configuration.wwwpath }} {
                 # First attempt to serve request as file, then
                 # as directory, then fall back to displaying a 404.
                 try_files $uri $uri/ =404;
@@ -150,14 +150,14 @@ data:
     echo -e "US\n\n\nSmarter\n\n"{{ default .Values.configuration.hostIP .Values.configuration.externalHostIP }}"\n\n" | openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt
     openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
     {{- end }}
-    mkdir -p /var/www/html
+    mkdir -p /var/www/html{{ .Values.configuration.wwwpath }}
     until [ -f /etc/rancher/k3s/k3s.yaml ]
     do
        sleep 1
     done
-    sed -e "s/127\.0\.0\.1/"{{ default .Values.configuration.hostIP .Values.configuration.externalHostIP }}"/" /etc/rancher/k3s/k3s.yaml > /var/www/html/k3s.yaml.{{ .Values.configuration.id }}
-    ln -s /var/lib/rancher/k3s/server/token /var/www/html/token.{{ .Values.configuration.id }}
-    ln -s /etc/nginx/conf.d/k3s-start.sh /var/www/html/k3s-start.sh.{{ .Values.configuration.id }}
+    sed -e "s/127\.0\.0\.1/"{{ default .Values.configuration.hostIP .Values.configuration.externalHostIP }}"/" /etc/rancher/k3s/k3s.yaml > /var/www/html{{ .Values.configuration.wwwpath }}k3s.yaml.{{ .Values.configuration.id }}
+    ln -s /var/lib/rancher/k3s/server/token /var/www/html{{ .Values.configuration.wwwpath }}token.{{ .Values.configuration.id }}
+    ln -s /etc/nginx/conf.d/k3s-start.sh /var/www/html{{ .Values.configuration.wwwpath }}k3s-start.sh.{{ .Values.configuration.id }}
     chmod -R ago+rw /var/www/html
     nginx -c /etc/nginx/conf.d/default.conf -g 'daemon off;'
 ---

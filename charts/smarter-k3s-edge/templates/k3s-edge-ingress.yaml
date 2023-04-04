@@ -11,7 +11,7 @@ spec:
   - host: {{ .Values.configuration.host }}.{{ .Values.configuration.domain }}
     http:
       paths:
-      - path: /
+      - path: {{ .Values.configuration.wwwpath }}
         pathType: Prefix
         backend:
           service:
@@ -19,7 +19,7 @@ spec:
             port:
               number: {{ .Values.configuration.portHTTP }}
   tls:
-    - secretName: {{ .Values.application.appName }}-tls
+    - secretName: {{ .Values.configuration.certificateID }}
       hosts:
         - {{ .Values.configuration.host }}.{{ .Values.configuration.domain }}
 ---
