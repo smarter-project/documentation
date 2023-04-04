@@ -21,13 +21,25 @@ Optional variables:
 
 ## Running
 
-Run the following commands
+An smarter-variables.tfvars.template is provided that can be copied so all the variables are set in this file and referenced by the option -var-file="smarter-variables.tfvars" where smarter-variables.tfvars is the name of the file used to set the variables. Commented variables are ignored.
+
+### Run the following commands if using the smarter-variables.tfvars optionn
+
+```
+terraform init
+# optional: terraform plan -var-file="smarter-variables.tfvars"
+terraform apply -var-file="smarter-variables.tfvars"
+```
+
+### Run the following commands if setting the variables on the command line
 
 ```
 terraform init
 # optional: terraform plan -var "letsencrypt_email=<valid email>"
 terraform apply -var "letsencrypt_email=<valid email>"
 ```
+
+## Checking status of installation
 
 Please observe that the full installation of k3s, helm charts in the EC2 instance can take up to 15min (expected around 10min) with various parts of the system being available at different times. If it is desired to follow the installation the command below will print the current log and follow it 
 
