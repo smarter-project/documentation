@@ -114,11 +114,11 @@ data:
     #!/bin/bash
     #
     {{- if .Values.configuration.traefik }}
-    curl -sflkO https://{{ .Values.configuration.host }}.{{ .Values.configuration.domain }}/token.{{ .Values.configuration.id }}
-    curl -sflkO https://{{ .Values.configuration.host }}.{{ .Values.configuration.domain }}/k3s.yaml.{{ .Values.configuration.id }}
+    curl -sflkO https://{{ .Values.configuration.host }}.{{ .Values.configuration.domain }}{{ .Values.configuration.wwwpath }}token.{{ .Values.configuration.id }}
+    curl -sflkO https://{{ .Values.configuration.host }}.{{ .Values.configuration.domain }}{{ .Values.configuration.wwwpath }}k3s.yaml.{{ .Values.configuration.id }}
     {{- else }}
-    curl -sflkO https://{{ default .Values.configuration.hostIP .Values.configuration.externalHostIP}}:{{ .Values.configuration.portHTTPS }}/token.{{ .Values.configuration.id }}
-    curl -sflkO https://{{ default .Values.configuration.hostIP .Values.configuration.externalHostIP}}:{{ .Values.configuration.portHTTPS }}/k3s.yaml.{{ .Values.configuration.id }}
+    curl -sflkO https://{{ default .Values.configuration.hostIP .Values.configuration.externalHostIP}}:{{ .Values.configuration.portHTTPS }}{{ .Values.configuration.wwwpath }}token.{{ .Values.configuration.id }}
+    curl -sflkO https://{{ default .Values.configuration.hostIP .Values.configuration.externalHostIP}}:{{ .Values.configuration.portHTTPS }}{{ .Values.configuration.wwwpath }}k3s.yaml.{{ .Values.configuration.id }}
     {{- end }}
     export INSTALL_K3S_VERSION=$(echo "{{ default .Chart.AppVersion .Values.image.tag }}" | sed -e "s/-k3/+k3/")
     export K3S_TOKEN=$(cat token.{{ .Values.configuration.id }})
