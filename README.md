@@ -1,7 +1,10 @@
 # SMARTER Demo Deployment Instructions
 
 [![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/smarter)](https://artifacthub.io/packages/search?repo=smarter)
-## This demo makes the following assumptions about your environment
+
+The demo can be deployed by using the terraform script on this repository [Terraform](terraform) and following the [readme](terraform/README.md). It is also described on the section "Deploy using terraform" below.
+
+## This demo makes the following assumptions about your environment if deployed using helm charts
 
 In this guide we assume you have done the following:
 - You should have an installed InfluxDB and Grafana instance in a separate kubernetes cluster (cloud or local).
@@ -32,7 +35,7 @@ In this guide we assume you have done the following:
 
 ### Deploy using terraform
 
-If you have an AWS account, a terraform script is available on this repository at [Terraform](terraform) and a [readme](terraform/README.md) is available. This script will allocate an AWS EC2 Graviton instance, install k3s and helm and install all the charts needed to run this demo. The only missing part is one or more edge nodes that the user needs to provide.
+If you have an AWS account, a terraform script is available on this repository at [Terraform](terraform) and a [readme](terraform/README.md) describes how to use it. This script will allocate an AWS EC2 Graviton instance, install k3s and helm and install all the charts needed to run this demo. The only missing part is one or more edge nodes that the user needs to provide.
 
 ### Step by step deployment
 
