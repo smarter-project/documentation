@@ -32,7 +32,7 @@ In this guide we assume you have done the following:
 
 ### Deploy using terraform
 
-If you have an AWS account, a terraform script is available on this repository at [Terraform readme](terraform/README.md). This script will allocate an AWS EC2 Graviton instance, install k3s and helm and install all the charts needed to run this demo. The only missing part is one or more edge nodes that the user needs to provide.
+If you have an AWS account, a terraform script is available on this repository at [Terraform](terraform) and a [readme](terraform/README.md) is available. This script will allocate an AWS EC2 Graviton instance, install k3s and helm and install all the charts needed to run this demo. The only missing part is one or more edge nodes that the user needs to provide.
 
 ### Step by step deployment
 
