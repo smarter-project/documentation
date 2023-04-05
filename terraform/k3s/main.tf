@@ -77,11 +77,13 @@ do
      sleep 5
 done
 echo "----- Adding smarter-edge to k3s"
-sudo su - ubuntu bash -c "helm install my-smartercloud-edge smarter/smarter-k3s-edge --set configuration.externalHostIP=$ADVERTISE_IP --set configuration.hostIP=$LOCAL_IP --set configuration.port=6444 --set configuration.portHTTP=80 --set configuration.id='${random_string.k3s_edge_id.result}' --set configuration.smarter_demo_labels=true --set configuration.host=grafana --set configuration.domain=$PUBLIC_HOSTNAME.sslip.io --set configuration.traefik=true --set configuration.certificateID=my-smartercloud-grafana-tls --set configuration.wwwpath=/k3s/ --wait"
+#sudo su - ubuntu bash -c "helm install my-smartercloud-edge smarter/smarter-k3s-edge --set configuration.externalHostIP=$ADVERTISE_IP --set configuration.hostIP=$LOCAL_IP --set configuration.port=6444 --set configuration.portHTTP=80 --set configuration.id='${random_string.k3s_edge_id.result}' --set configuration.smarter_demo_labels=true --set configuration.host=grafana --set configuration.domain=$PUBLIC_HOSTNAME.sslip.io --set configuration.traefik=true --set configuration.certificateID=my-smartercloud-grafana-tls --set configuration.wwwpath=/k3s/ --wait"
+sudo su - ubuntu bash -c "helm install my-smartercloud-edge smarter/smarter-k3s-edge --set configuration.externalHostIP=$ADVERTISE_IP --set configuration.hostIP=$LOCAL_IP --set configuration.port=6444 --set configuration.portHTTP=80 --set configuration.id='${random_string.k3s_edge_id.result}' --set configuration.smarter_demo_labels=true --set configuration.host=k3s --set configuration.domain=$PUBLIC_HOSTNAME.sslip.io --set configuration.traefik=true --set configuration.wwwpath=/ --wait"
 echo "----- Waiting for k3s.yaml from k3s-edge"
 until [ -f /home/ubuntu/k3s.yaml.${random_string.k3s_edge_id.result} ]
 do
-     sudo su - ubuntu bash -c "wget --no-check-certificate https://grafana.$PUBLIC_HOSTNAME.sslip.io/k3s/k3s.yaml.${random_string.k3s_edge_id.result}"
+     #sudo su - ubuntu bash -c "wget --no-check-certificate https://grafana.$PUBLIC_HOSTNAME.sslip.io/k3s/k3s.yaml.${random_string.k3s_edge_id.result}"
+     sudo su - ubuntu bash -c "wget --no-check-certificate https://k3s.$PUBLIC_HOSTNAME.sslip.io/k3s.yaml.${random_string.k3s_edge_id.result}"
      if [ -z "$(grep 'kind: Config' /home/ubuntu/k3s.yaml.${random_string.k3s_edge_id.result})" ]
      then
          echo "Received a file but it is not a k3s.yaml file, removing"

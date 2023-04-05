@@ -24,4 +24,3 @@ configuration:
   # Uncomment to enable labeling for smarter-demo
   #smarter_demo_labels: true
   wwwpath: /
-  certificateID: "{{ .Values.application.appName }}-tls"
