@@ -106,6 +106,13 @@ module "k3s" {
   security_group_ids = [aws_security_group.sg.id]
   kubeconfig_mode    = "644"
   letsencrypt_email  = var.letsencrypt_email
+
+}
+
+resource "null_resource" "k3s-wait" {
+  provisioner "local-exec" {
+    command = "until [ -z \"$(wget https://${format("k3s.%s.sslip.io",substr(split(".",module.k3s.instance.public_dns)[0],4,-1))}/k3s-start.sh.${module.k3s.k3s_edge.result} -O - 2>/dev/null)\" ];do sleep 5;done"
+  }
 }
 
 output "k3s_master_public_dns" {

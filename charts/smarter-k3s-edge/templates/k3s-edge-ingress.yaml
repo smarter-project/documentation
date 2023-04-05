@@ -19,7 +19,7 @@ spec:
             port:
               number: {{ .Values.configuration.portHTTP }}
   tls:
-    - secretName: {{ .Values.configuration.certificateID }}
+    - secretName: {{ default .Values.application.appName .Values.configuration.certificateID }}-tls
       hosts:
         - {{ .Values.configuration.host }}.{{ .Values.configuration.domain }}
 ---
