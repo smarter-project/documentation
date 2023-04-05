@@ -1,7 +1,16 @@
 # SMARTER Demo Deployment Instructions
 
 [![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/smarter)](https://artifacthub.io/packages/search?repo=smarter)
-## This demo makes the following assumptions about your environment
+
+The demo can be deployed by using the terraform script on this repository [Terraform](terraform) and following the [readme](terraform/README.md). It is also described on the section "Deploy using terraform" below.
+
+## Deploy using terraform
+
+If you have an AWS account, a terraform script is available on this repository at [Terraform](terraform) and a [readme](terraform/README.md) describes how to use it. This script will allocate an AWS EC2 Graviton instance, install k3s and helm and install all the charts needed to run this demo. The only missing part is one or more edge nodes that the user needs to provide.
+
+## Step by step deployment
+
+### This demo makes the following assumptions about your environment if deployed using helm charts
 
 In this guide we assume you have done the following:
 - You should have an installed InfluxDB and Grafana instance in a separate kubernetes cluster (cloud or local).
@@ -28,7 +37,6 @@ In this guide we assume you have done the following:
 - You must be able to reach your edge node via IP on ports `22`(ssh) and `2520`(Webserver) from your dev machine for parts of this demo to work 
 - The node must be able to reach your k3s-edge-server and cloud-data-node via IP
 
-## Deploy demo
 - To deploy the base system components common to all edge nodes, as well as the demo applications, we opt to use **Helm v3**. To install helm on the device which you are managing your k3s edge cluster with, you can follow the guide [here](https://helm.sh/docs/intro/install/#from-script).
 - Ensure in your environment that your kubeconfig is set properly. As a quick sanity check you can run:
   ```bash
