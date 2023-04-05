@@ -67,14 +67,14 @@ Helm was used to install charts and can be used to manage them by setting the co
 The edge devices can be installed (Raspberry pi4 for example) by running the following script. The script will install a k3s agent and configure that agent to be a node for k3s edge running on the EC2 instance.
 
 ```
-wget https://grafana.<External IP of EC2 separated with dash>.sslip.io//k3s/k3s-start.sh.<password/ID> | bash -s -
+wget https://k3s.<External IP of EC2 separated with dash>.sslip.io/k3s-start.sh.<password/ID> | bash -s -
 ```
 
 Token and k3s.yaml file can be accessed by:
 
 ```
-wget https://grafana.<External IP of EC2 separated with dash>.sslip.io//k3s/token.<password/ID> | bash -s -
-wget https://grafana.<External IP of EC2 separated with dash>.sslip.io//k3s/k3s.yaml.<password/ID> | bash -s -
+wget https://k3s.<External IP of EC2 separated with dash>.sslip.io/token.<password/ID> | bash -s -
+wget https://k3s.<External IP of EC2 separated with dash>.sslip.io/k3s.yaml.<password/ID> | bash -s -
 ```
 
 # Troubleshooting

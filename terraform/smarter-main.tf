@@ -111,17 +111,22 @@ module "k3s" {
 
 resource "null_resource" "k3s-wait" {
   provisioner "local-exec" {
-    command = "until [ -z \"$(wget https://${format("k3s.%s.sslip.io",substr(split(".",module.k3s.instance.public_dns)[0],4,-1))}/k3s-start.sh.${module.k3s.k3s_edge.result} -O - 2>/dev/null)\" ];do sleep 5;done"
+    command = "until [ ! -z \"$(wget https://${format("k3s.%s.sslip.io",substr(split(".",module.k3s.instance.public_dns)[0],4,-1))}/k3s-start.sh.${module.k3s.k3s_edge.result} -O - 2>/dev/null)\" ];do sleep 5;done"
   }
 }
 
-output "k3s_master_public_dns" {
-  value = module.k3s.instance.public_dns
+output "ssh_ec2_instance" {
+  value = "${format("Access EC2 instance using ssh -i %s ubuntu@%s",module.ssh_key_pair.private_key_filename,module.k3s.instance.public_dns)}"
   description = "EC2 instance name allocated"
 }
 
-output "k3s_edge" {
-  value = module.k3s.k3s_edge.result
+output "k3s_master_public_dns" {
+  value = "${format("Install a node using wget https://k3s.%s.sslip.io/k3s-start.sh.%s",substr(split(".",module.k3s.instance.public_dns)[0],4,-1),module.k3s.k3s_edge.result)}"
+  description = "SMARTER k3s access"
+}
+
+output "grafana_edge" {
+  value = "${format("Access grafana using https://grafana.%s.sslip.io with user admin and password %s",substr(split(".",module.k3s.instance.public_dns)[0],4,-1),module.k3s.k3s_edge.result)}"
   description = "System-wide password: grafana admin, k3s-edge ID"
 }
 
