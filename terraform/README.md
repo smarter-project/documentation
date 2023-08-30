@@ -1,9 +1,13 @@
 # Terraform script to install smarter on AWS EC2
 
-This script installs SMARTER example using helm charts into one AWS EC2 instance. 
+This script installs SMARTER example into one AWS EC2 instance. 
 
 This figure shows the components of the application and where they reside. 
 ![SMARTER](SMARTER_example.png)
+
+Terraform script allocates an AWS EC2 instance with Ubuntu and installs a k3s cluster ond helm on the instance. A shell script is created on home directory of the EC2 instance that is capable of installing all cloud components of SMARTER. This separation allows the user to have more control of how the system is deployed.
+
+## AWS authentication and deployment configuration
 
 It assumes that the environment variables AWS\_ACCESS\_KEY\_ID, AWS\_SECRET\_ACCESS\_KEY and AWS\_SESSION\_TOKEN are set correctly so Terraform can access AWS.
 Set the following variables to correct values:
@@ -41,11 +45,12 @@ terraform apply -var "letsencrypt_email=<valid email>"
 
 ## Checking status of installation
 
-Please observe that the full installation of k3s, helm charts in the EC2 instance can take up to 15min (expected around 10min) with various parts of the system being available at different times. If it is desired to follow the installation the command below will print the current log and follow it 
+Please observe that the full installation of k3s, helm charts in the EC2 instance can take up to 8min (expected around 7min) with various parts of the system being available at different times. If it is desired to follow the installation the command below will print the current log and follow it 
 
 ```bash
 ssh -i ssh/<deployment-name>-prod-k3s.pem ubuntu@<EC2 instance allocated> "tail -f /var/log/cloud-init-output.log"
 ```
+
 
 ## Outputs
 
@@ -60,7 +65,10 @@ ssh -i ssh/<deployment-name>-prod-k3s.pem ubuntu@<EC2 instance allocated>
 ```
 
 K3s cloud access on the instance (running the cloud containers) can be achieved by setting KUBECONFIG to /etc/rancher/k3s/k3s.yaml. It should be already be set for the ubuntu user at the end of the installation.
-K3s edge, that manages the edge devices and applications running on them, can be accessed by setting KUBECONFIG as $(pwd)/k3s.yaml.\<password/ID\>, that also will be available at the end of the installation.
+
+A script called install-smarter.sh is created at home directory that will install helm charts for cloud components in the existing k3s cluster.
+
+After running install-smarter.sh script, K3s edge that manages the edge devices and applications running on them, can be accessed by setting KUBECONFIG as $(pwd)/k3s.yaml.\<password/ID\>.
 
 Helm was used to install charts and can be used to manage them by setting the correct KUBECONFIG.
 

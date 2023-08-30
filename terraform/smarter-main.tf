@@ -111,7 +111,8 @@ module "k3s" {
 
 resource "null_resource" "k3s-wait" {
   provisioner "local-exec" {
-    command = "until [ ! -z \"$(wget https://${format("k3s.%s.sslip.io",substr(split(".",module.k3s.instance.public_dns)[0],4,-1))}/k3s-start.sh.${module.k3s.k3s_edge.result} -O - 2>/dev/null)\" ];do sleep 5;done"
+    #command = "until [ ! -z \"$(wget https://${format("k3s.%s.sslip.io",substr(split(".",module.k3s.instance.public_dns)[0],4,-1))}/k3s-start.sh.${module.k3s.k3s_edge.result} -O - 2>/dev/null)\" ];do sleep 5;done"
+    command = "while true;do ssh -F none -o \"StrictHostKeyChecking no\" -o \"UserKnownHostsFile /dev/null\" -i ${format("%s ubuntu@%s",module.ssh_key_pair.private_key_filename,module.k3s.instance.public_dns)} \"while true;do if [ -e /etc/smarter.OK ];then exit 0;fi;sleep 0;done\";if [ $? -eq 0 ];then exit 0;fi;sleep 5;done"
   }
 }
 
