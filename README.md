@@ -47,7 +47,7 @@ In this guide we assume you have done the following:
   ```bash
   helm repo add smarter https://smarter-project.github.io/documentation
   ```
-- Use the helm chart on https://github.com/smarter-project/documentation/chart to install CNI, DNS and device-manager. This can be done by 
+- Use the helm chart on [https://github.com/smarter-project/documentation/tree/main/charts](https://github.com/smarter-project/documentation/tree/main/charts) to install CNI, DNS and device-manager. This can be done by 
   ```bash
   helm install my-smarter-edge smarter/smarter-edge --wait
   ```
