@@ -74,7 +74,7 @@ In this guide we assume you have done the following:
   ```bash
   kubectl get pods -A -w
   ```
-- With all nodes running successfully, if you are on the same network as your edge node, you can navigate a browser to the IP of the edge node, and see the image detector running on your camera feed in real time.
+- With all nodes running successfully, if you are on the same network as your edge node, you can navigate a browser to the IP of the edge node (http://\<NODE_IP\>:2520), and see the image detector running on your camera feed in real time.
 - To terminate the demo, you can simply unlabel the node for each workload:
   ```bash
   export NODE_NAME=<your node name>
