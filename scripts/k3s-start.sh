@@ -8,7 +8,7 @@ HOSTPORT=${HOSTPORT:-6443}
 # IP that the clients will be used to connect (If on the cloud it will probably be the external IP of the server)
 # HOSTIP
 # Which version of k3s or k8s to use
-DOCKERIMAGE=${DOCKERIMAGE:-rancher/k3s:v1.25.2-k3s1}
+DOCKERIMAGE=${DOCKERIMAGE:-rancher/k3s:v1.31.3-k3s1}
 
 # Do not set this variables, they are used below
 CLOUD_INSTANCE=No
@@ -72,6 +72,24 @@ function check_main_ip() {
 
 }
 
+function check_if_k3s_running() {
+	CURRENT_INSTANCE=$(docker inspect k3s_${SERVERNAME} 2>/dev/null)
+        if [ $? -eq 0 ]
+	then
+		NAMEFOUND=$(echo "${CURRENT_INSTANCE}" | grep "\"/k3s_${SERVERNAME}\"")
+		if [ ! -z "${NAMEFOUND}" ]
+		then
+			echo "This instance \"${SERVERNAME}\" is already running."
+			echo "Either create a new one with a different name or stop the current one before recreating"
+			echo "To stop and remove the database please execute the following commands:"
+			echo "docker stop k3s_${SERVERNAME}"
+			echo "sudo rm -rf ${SERVERNAME}"
+			exit 1
+		fi
+	fi
+}
+
+
 [ -z "${HOSTIP}" ] && check_running_cloud
 [ -z "${HOSTIP}" ] && check_main_ip
 
@@ -83,9 +101,10 @@ KUBECTL_FILE=kubectl-${SERVERNAME}.sh
 KUBECTL_EDGE_INSTALL_FILE=kube_edge_install-${SERVERNAME}.sh
 LOCALSERVERDIR=$(pwd)/${SERVERNAME}
 
-if [ ! -e "${START_FILE}" ]
-then
-	cat<<EOF >> "${START_FILE}"
+check_if_k3s_running 
+
+rm -f kube.${SERVERNAME}.config token.${SERVERNAME}
+cat<<EOF > "${START_FILE}"
 #!/bin/bash
 #
 export SERVERNAME=${SERVERNAME}
@@ -125,10 +144,11 @@ echo "k3s_${SERVERNAME} is running, access this instance using the credentials a
 
 exit 0
 EOF
-	chmod u+x  "${START_FILE}"
-fi
+chmod u+x  "${START_FILE}"
 
+echo "Starting k3s server instance \"${SERVERNAME}\" in docker, it will take a minute or so....."
 ./${START_FILE}
+echo "K3s started"
 
 if [ $? -gt 0 ]
 then
@@ -149,42 +169,32 @@ case $(uname -m) in
 		exit 1;;
 esac
 
+rm -f "${FILE_DOWNLOAD}"
+wget --quiet "https://github.com/k3s-io/k3s/releases/download/${K3S_VERSION}/${FILE_DOWNLOAD}"
+
 if [ ! -e "${FILE_DOWNLOAD}" ]
 then
-        wget "https://github.com/k3s-io/k3s/releases/download/${K3S_VERSION}/${FILE_DOWNLOAD}"
-
-	if [ ! -e "${FILE_DOWNLOAD}" ]
-	then
-		echo "Download failed....... sorry, but check to see what was wrong"
-		exit 1
-	fi
-	chmod u+x "${FILE_DOWNLOAD}"
+	echo "Download failed....... sorry, but check to see what was wrong"
+	exit 1
 fi
+chmod u+x "${FILE_DOWNLOAD}"
 
-if [ ! -e "${KUBECTL_FILE}" ]
-then
-	cat<<EOF > "${KUBECTL_FILE}"
+cat<<EOF > "${KUBECTL_FILE}"
 #!/bin/bash
 
 export KUBECONFIG=$(pwd)/kube.default_smarter.config
 
 exec $(pwd)/${FILE_DOWNLOAD} kubectl \$*
 EOF
-	chmod u+x "${KUBECTL_FILE}"
-fi
+chmod u+x "${KUBECTL_FILE}"
 
-if [ ! -e "${ENV_FILE}" ]
-then
-	cat<<EOF > "${ENV_FILE}"
+cat<<EOF > "${ENV_FILE}"
 export KUBECONFIG=$(pwd)/kube.default_smarter.config
 alias kubectl="$(pwd)/${FILE_DOWNLOAD} kubectl"
 EOF
-	chmod u+x "${ENV_FILE}"
-fi
+chmod u+x "${ENV_FILE}"
 
-if [ ! -e "${KUBECTL_EDGE_INSTALL_FILE}" ]
-then
-	cat<<EOF > "${KUBECTL_EDGE_INSTALL_FILE}"
+cat<<EOF > "${KUBECTL_EDGE_INSTALL_FILE}"
 export INSTALL_K3S_VERSION="${K3S_VERSION}"
 export K3S_TOKEN=$(cat token.${SERVERNAME})
 export K3S_URL=https://${HOSTIP}:${HOSTPORT}
@@ -199,9 +209,10 @@ sh -s - \\
   --node-taint smarter.type=edge:NoSchedule \\
   --node-label smarter-build=user-installed 
 EOF
-	chmod u+x "${KUBECTL_EDGE_INSTALL_FILE}"
-fi
+chmod u+x "${KUBECTL_EDGE_INSTALL_FILE}"
 
+echo "Use this script to restart k3s server for this instance if necessary: \"${START_FILE}\""
+echo "Use this script to set up k3s agents running on a node that will connect to this server: \"${KUBECTL_EDGE_INSTALL_FILE}\""
 echo "A useful trick is to create an alias for shell like: alias kubectl='$(pwd)/${KUBECTL_FILE}', if that is your only k3s running"
 
 exit 0
